@@ -2,7 +2,14 @@ import React from 'react';
 import {TextInput} from 'react-native';
 import {styles} from './styles';
 
-export default function TextInputCustom({placeholder, type, autoCapitalize}) {
+export default function TextInputCustom({
+  placeholder,
+  type,
+  value,
+  onChangeText,
+  autoCapitalize,
+  autoFocus,
+}) {
   return (
     <TextInput
       placeholder={placeholder}
@@ -10,6 +17,9 @@ export default function TextInputCustom({placeholder, type, autoCapitalize}) {
       placeholderTextColor={'#b0b2b5'}
       keyboardType={type}
       autoCapitalize={autoCapitalize}
+      value={value}
+      onChangeText={onChangeText}
+      autoFocus={autoFocus}
     />
   );
 }
