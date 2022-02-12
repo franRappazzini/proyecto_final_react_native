@@ -1,10 +1,18 @@
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
-import React from 'react';
+import {getAllUsers} from '../../../redux/actions/UserActions';
+import {useDispatch} from 'react-redux';
 
 export default function HomeScreen({navigation}) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
   return (
     <View style={styleContainer}>
       <Text style={{fontSize: 20, color: colors.light, textAlign: 'center'}}>

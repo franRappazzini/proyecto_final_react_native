@@ -1,7 +1,4 @@
-import {Text, View} from 'react-native';
-
 import ChatScreen from '../../screens/Chat/Chat/ChatScreen';
-import ChatsListScreen from '../../screens/Chat/ChatsList/ChatsListScreen';
 import MensajeDetallesScreen from '../../screens/Chat/MensajeDetalles/MensajeDetallesScreen';
 import React from 'react';
 import {colors} from '../../utils/constants/themes';
@@ -9,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default function ChatNavigation() {
+export default function ChatNavigation({route}) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,11 +15,10 @@ export default function ChatNavigation() {
         },
         headerTintColor: colors.light,
       }}>
-      {/* <Stack.Screen name="ChatsListScreen" component={ChatsListScreen} /> */}
       <Stack.Screen
         name="ChatScreen"
-        component={ChatScreen}
-        options={({route}) => ({title: 'username'})}
+        component={() => <ChatScreen route={route} />}
+        options={{title: route.params.username}}
       />
 
       <Stack.Screen

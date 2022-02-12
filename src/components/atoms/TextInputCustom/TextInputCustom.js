@@ -9,6 +9,7 @@ export default function TextInputCustom({
   onChangeText,
   autoCapitalize,
   autoFocus,
+  autoComplete,
 }) {
   return (
     <TextInput
@@ -20,6 +21,7 @@ export default function TextInputCustom({
       value={value}
       onChangeText={onChangeText}
       autoFocus={autoFocus}
+      autoComplete={autoComplete}
     />
   );
 }

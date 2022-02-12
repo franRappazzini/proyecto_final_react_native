@@ -19,13 +19,16 @@ export default function AppNavigation() {
 
         <Stack.Screen name="Tab" component={TabNavigation} />
 
-        <Stack.Screen name="ChatNav" component={ChatNavigation} />
+        <Stack.Screen
+          name="ChatNav"
+          component={({route}) => <ChatNavigation route={route} />}
+        />
 
         <Stack.Screen name="SalasNav" component={SalasNavigation} />
 
         <Stack.Screen
           name="InfoUsuariosNav"
-          component={InfoUsuariosNavigation}
+          component={({route}) => <InfoUsuariosNavigation route={route} />}
         />
 
         <Stack.Screen name="InfoSalaNav" component={InfoSalaNavigation} />

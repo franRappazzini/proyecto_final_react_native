@@ -5,7 +5,13 @@ import React from 'react';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
 
-export default function Usuarios({navigation, onPress}) {
+export default function Usuarios({
+  username,
+  nombre,
+  apellido,
+  navigation,
+  onPress,
+}) {
   return (
     <Pressable
       onPress={onPress}
@@ -25,8 +31,10 @@ export default function Usuarios({navigation, onPress}) {
 
       <View style={styles.infoContainer}>
         <View>
-          <Text style={styles.usernameText}>username</Text>
-          <Text style={styles.nombreText}>Nombre Apellido</Text>
+          <Text style={styles.usernameText}>{username}</Text>
+          <Text style={styles.nombreText}>
+            {nombre} {apellido}
+          </Text>
         </View>
 
         <View style={styles.iconsContainer}>
@@ -41,7 +49,7 @@ export default function Usuarios({navigation, onPress}) {
             name="heart"
             size={25}
             color={colors.purple}
-            onPress={navigation}
+            onPress={() => {}}
             style={styles.iconHeart}
           />
         </View>

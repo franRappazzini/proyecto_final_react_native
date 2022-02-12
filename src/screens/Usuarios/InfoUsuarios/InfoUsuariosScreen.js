@@ -4,7 +4,9 @@ import React from 'react';
 import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
 
-export default function InfoUsuariosScreen() {
+export default function InfoUsuariosScreen({route}) {
+  const {nombre, apellido, username} = route.params;
+
   return (
     <View style={styleContainer}>
       <Image
@@ -14,8 +16,10 @@ export default function InfoUsuariosScreen() {
         style={styles.img}
       />
 
-      <Text style={styles.text}>USERNAME</Text>
-      <Text style={styles.text}>Nombre Apellido</Text>
+      <Text style={styles.text}>{username}</Text>
+      <Text style={styles.text}>
+        {nombre} {apellido}
+      </Text>
     </View>
   );
 }

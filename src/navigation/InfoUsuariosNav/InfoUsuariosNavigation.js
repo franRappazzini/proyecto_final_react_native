@@ -5,14 +5,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default function InfoUsuariosNavigation() {
+export default function InfoUsuariosNavigation({route}) {
   return (
     <Stack.Navigator
       screenOptions={{
         headerTintColor: colors.light,
         headerStyle: {backgroundColor: colors.darkGrey},
       }}>
-      <Stack.Screen name="InfoUsuarioScreen" component={InfoUsuariosScreen} />
+      <Stack.Screen
+        name="InfoUsuarioScreen"
+        component={() => <InfoUsuariosScreen route={route} />}
+      />
     </Stack.Navigator>
   );
 }
