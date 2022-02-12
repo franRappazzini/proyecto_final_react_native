@@ -6,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default function SalasNavigation() {
+export default function SalasNavigation({route}) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -15,8 +15,8 @@ export default function SalasNavigation() {
       }}>
       <Stack.Screen
         name="SalaScreen"
-        component={SalaScreen}
-        options={({route}) => ({title: 'Nombre de sala'})}
+        component={() => <SalaScreen sala={route.params} />}
+        options={() => ({title: route.params.sala.name})}
       />
       <Stack.Screen
         name="MensajeDetalleSalaScreen"

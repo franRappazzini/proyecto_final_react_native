@@ -22,7 +22,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  usernameText: {color: colors.light, fontSize: 16, fontWeight: '500'},
+  usernameText: {
+    color: colors.light,
+    fontSize: 16,
+    fontWeight: '500',
+    marginRight: 10,
+  },
   fechaText: {color: colors.light, fontSize: 12, fontWeight: '300'},
   mensajeText: {color: colors.light, fontSize: 16},
 

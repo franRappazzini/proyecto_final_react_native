@@ -5,7 +5,9 @@ import React from 'react';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
 
-export default function Sala({onPress, infoSala}) {
+export default function Sala({sala, onPress, infoSala}) {
+  const {name, id, description} = sala;
+
   return (
     <Pressable
       onPress={onPress}
@@ -14,8 +16,8 @@ export default function Sala({onPress, infoSala}) {
         styles.salaContainer,
       ]}>
       <View>
-        <Text style={styles.salaNombre}>Nombre de sala</Text>
-        <Text style={styles.salaDescripcion}>Descripción de sala</Text>
+        <Text style={styles.salaNombre}>{name}</Text>
+        <Text style={styles.salaDescripcion}>{description}</Text>
       </View>
 
       <View style={styles.iconsContainer}>

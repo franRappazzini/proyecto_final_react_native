@@ -4,12 +4,15 @@ export const GET_MENSAJES = 'GET_MENSAJES';
 
 const db = getDB();
 
-export function getMensajes({id, username}) {
+export function getMensajes(id, username) {
+  console.warn(id, username);
   return async dispatch => {
     db.ref(`users/${id}/chats/${username}`).on('value', data => {
       const mensajes = data.val()
         ? Object.keys(data.val()).map(key => ({...data.val()[key], id: key}))
         : false;
+
+      console.warn(mensajes);
 
       dispatch({
         type: GET_MENSAJES,
@@ -19,13 +22,13 @@ export function getMensajes({id, username}) {
   };
 }
 
-export function createMensaje({id, user, mensaje}) {
+export function createMensaje(id, username, mensaje) {
   return async dispatch => {
     try {
-      const {username, message, hour, day} = mensaje;
+      const {user, message, hour, day} = mensaje;
 
-      db.ref(`users/${id}/chats/${user}`).push({
-        username: username,
+      db.ref(`users/${id}/chats/${username}`).push({
+        username: user,
         message: message,
         hour: hour,
         day: day,

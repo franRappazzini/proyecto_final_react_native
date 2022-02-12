@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: 3,
   },
-  miMensajeContaienr: {
+  miMensajeContainer: {
     padding: 10,
     backgroundColor: colors.purple,
     borderRadius: 15,
