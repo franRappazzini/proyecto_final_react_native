@@ -1,23 +1,64 @@
 import React, {useState} from 'react';
 import {Switch, Text, View} from 'react-native';
 import {colors, styleContainer} from '../../../utils/constants/themes';
+import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
+import {createSala} from '../../../redux/actions/SalaAction';
+import {fecha} from '../../../utils/functions/functions';
 import {styles} from './styles';
 
-export default function CrearSalaScreen() {
+export default function CrearSalaScreen({navigation}) {
+  const [nombreSala, setNombreSala] = useState('');
+  const [descripcionSala, setDescripcionSala] = useState('');
+  const [passwordSala, setPasswordSala] = useState('');
   const [switchEnabled, setSwitchEnabled] = useState(false);
+  const user = useSelector(state => state.user.user);
   const toggleSwitch = () => setSwitchEnabled(!switchEnabled);
+  const dispatch = useDispatch();
+
+  function crearSala() {
+    if (
+      nombreSala.trim() !== '' &&
+      descripcionSala.trim() !== '' &&
+      (switchEnabled ? passwordSala.trim() !== '' : true)
+    ) {
+      dispatch(
+        createSala({
+          createdBy: user.username,
+          date: fecha().day,
+          description: descripcionSala,
+          name: nombreSala,
+          password: switchEnabled ? passwordSala : '',
+          type: switchEnabled ? 'private' : 'public',
+        }),
+
+        setSwitchEnabled(false),
+
+        navigation.goBack(),
+      );
+    } else {
+      console.warn('FALTAN DATOS');
+    }
+  }
 
   return (
     <View style={styleContainer}>
       <TextLabel text="Nombre de sala" />
-      <TextInputCustom placeholder="Nombre" />
+      <TextInputCustom
+        value={nombreSala.trimStart()}
+        onChangeText={setNombreSala}
+        placeholder="Nombre"
+      />
 
       <TextLabel text="Descripción" />
-      <TextInputCustom placeholder="Descripción" />
+      <TextInputCustom
+        value={descripcionSala.trimStart()}
+        onChangeText={setDescripcionSala}
+        placeholder="Descripción"
+      />
 
       <View style={styles.switchContainer}>
         <Switch
@@ -27,14 +68,29 @@ export default function CrearSalaScreen() {
           value={switchEnabled}
         />
 
-        <Text style={styles.textSwtich}>Publica</Text>
+        <Text style={styles.textSwtich}>
+          {switchEnabled ? 'Privada' : 'Publica'}
+        </Text>
       </View>
 
-      <TextLabel text="Contraseña" />
-      <TextInputCustom placeholder="Contraseña" type="visible-password" />
+      {switchEnabled && (
+        <View>
+          <TextLabel text="Contraseña" />
+          <TextInputCustom
+            value={passwordSala.trim()}
+            onChangeText={setPasswordSala}
+            placeholder="Contraseña"
+            type="visible-password"
+          />
+        </View>
+      )}
 
       <View style={styles.crearSalaContainer}>
-        <BtnCustom text="Crear sala" color={colors.purple} />
+        <BtnCustom
+          text="Crear sala"
+          color={colors.purple}
+          onPress={crearSala}
+        />
       </View>
     </View>
   );

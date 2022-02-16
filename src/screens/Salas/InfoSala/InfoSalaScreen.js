@@ -8,7 +8,7 @@ import {styles} from './styles';
 export default function InfoSalaScreen({sala}) {
   const {name, description, createdBy, messages, date} = sala.sala;
 
-  const arrayMensajes = Object.values(messages);
+  const arrayMensajes = messages ? Object.values(messages) : [];
 
   return (
     <View style={styleContainer}>

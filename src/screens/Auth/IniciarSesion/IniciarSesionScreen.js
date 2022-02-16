@@ -1,12 +1,12 @@
 import {Alert, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
-import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
+import {getUser} from '../../../redux/actions/UserActions';
 import {styles} from './styles';
 
 export default function IniciarSesionScreen({navigation}) {
@@ -16,13 +16,16 @@ export default function IniciarSesionScreen({navigation}) {
   const dispatch = useDispatch();
 
   function handleIniciarSesion() {
-    const findUsuario = usuarios.find(
+    const indexUsuario = usuarios.findIndex(
       user => (user.email || user.username) === email,
     );
 
-    if (findUsuario && contrasenia === findUsuario.password) {
+    const usuario = usuarios[indexUsuario];
+    console.warn(usuario);
+
+    if (usuario && contrasenia === usuario.password) {
+      dispatch(getUser(usuario));
       navigation.navigate('Tab');
-      dispatch(getUser(findUsuario));
     } else {
       Alert.alert('Usuario/email  o contraseña incorrectos');
     }

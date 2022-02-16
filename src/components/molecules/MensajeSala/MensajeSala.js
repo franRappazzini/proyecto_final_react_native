@@ -5,7 +5,6 @@ import {styles} from './styles';
 import {useSelector} from 'react-redux';
 
 export default function MensajeSala({mensaje, onLongPress}) {
-  // crear function para saber de quien es el mensaje (probar si dejarlo asi o cambiar los styles)
   const user = useSelector(state => state.user.user);
   const {username, message, day, hour} = mensaje;
 

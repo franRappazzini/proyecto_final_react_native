@@ -15,7 +15,9 @@ export default function SalasNavigation({route}) {
       }}>
       <Stack.Screen
         name="SalaScreen"
-        component={() => <SalaScreen sala={route.params} />}
+        component={({navigation}) => (
+          <SalaScreen navigation={navigation} sala={route.params} />
+        )}
         options={() => ({title: route.params.sala.name})}
       />
       <Stack.Screen

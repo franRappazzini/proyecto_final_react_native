@@ -3,6 +3,7 @@ import {getDB} from '../../utils/services/db';
 export const GET_SALAS = 'GET_SALAS';
 export const GET_MESSAGES_SALA = 'GET_MESSAGES_SALA';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const CREATE_SALA = 'CREATE_SALA';
 
 const db = getDB();
 
@@ -50,6 +51,18 @@ export function createMensajeSala(idSala, mensaje) {
       db.ref(`salas/${idSala}/messages`).push(mensaje);
 
       dispatch({type: SEND_MESSAGE});
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+}
+
+export function createSala(sala) {
+  return dispatch => {
+    try {
+      db.ref('salas').push(sala);
+
+      dispatch({type: CREATE_SALA});
     } catch (err) {
       console.warn(err);
     }

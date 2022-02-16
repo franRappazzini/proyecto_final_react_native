@@ -1,5 +1,11 @@
-import {FlatList, KeyboardAvoidingView} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  KeyboardAvoidingView,
+  Text,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {colors, styleContainer} from '../../../utils/constants/themes';
 import {
   createMensajeSala,
   getMensajesSala,
@@ -9,7 +15,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import InputEnviarMensaje from '../../../components/molecules/InputEnviarMensaje/InputEnviarMensaje';
 import MensajeSala from '../../../components/molecules/MensajeSala/MensajeSala';
 import {fecha} from '../../../utils/functions/functions';
-import {styleContainer} from '../../../utils/constants/themes';
 
 export default function SalaScreen({sala, navigation}) {
   const [nuevoMensaje, setNuevoMensaje] = useState('');
@@ -37,6 +42,10 @@ export default function SalaScreen({sala, navigation}) {
 
   return (
     <KeyboardAvoidingView style={styleContainer}>
+      {mensajes && mensajes.length < 1 && (
+        <ActivityIndicator size="large" color={colors.purple} />
+      )}
+      {!mensajes && <Text>No hay mensajes</Text>}
       {mensajes && mensajes.length > 0 && (
         <FlatList
           data={mensajes}
@@ -44,7 +53,7 @@ export default function SalaScreen({sala, navigation}) {
             <MensajeSala
               mensaje={item}
               onLongPress={() =>
-                navigation.navigate('MensajeDetalleSalaScreen')
+                navigation.navigate('MensajeDetalleSalaScreen', {mensaje: item})
               }
             />
           )}

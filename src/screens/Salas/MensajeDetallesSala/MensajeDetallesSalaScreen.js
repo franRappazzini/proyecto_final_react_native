@@ -1,24 +1,38 @@
-import {Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 
-import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MensajeSala from '../../../components/molecules/MensajeSala/MensajeSala';
-import React from 'react';
+import {View} from 'react-native';
 import {styles} from '../../Chat/MensajeDetalles/styles';
+import {useSelector} from 'react-redux';
 
-export default function MensajeDetallesSalaScreen() {
+export default function MensajeDetallesSalaScreen({route}) {
+  const [mismoUser, setMismoUser] = useState(false);
+  const user = useSelector(state => state.user.user);
+  const {mensaje} = route.params;
+
+  useEffect(() => {
+    // comprueba si el mensaje es del usuario para poder eliminarlo
+    if (user.username === mensaje.username) {
+      setMismoUser(true);
+    } else {
+      setMismoUser(false);
+    }
+  }, [user, mensaje]);
+
   return (
     <View style={styleContainer}>
       <View style={styles.mensajeContainer}>
-        <MensajeSala />
-      </View>
-
-      <Text>Enviado por: username</Text>
-      <Text>Sala: Nombre de sala</Text>
-      <Text>Fecha: 10/02/2022, 16:58hs</Text>
-
-      <View style={styles.btnEliminarContainer}>
-        <BtnCustom text="Eliminar mensaje" color={colors.red} />
+        {mismoUser && (
+          <Ionicons
+            name="trash-outline"
+            size={30}
+            color={colors.red}
+            onPress={() => {}}
+          />
+        )}
+        <MensajeSala mensaje={mensaje} />
       </View>
     </View>
   );

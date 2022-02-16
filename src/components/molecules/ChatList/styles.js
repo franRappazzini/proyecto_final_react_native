@@ -20,5 +20,6 @@ export const styles = StyleSheet.create({
   },
   usernameText: {color: colors.light, fontSize: 18, fontWeight: '500'},
   mensajeText: {color: colors.light, fontSize: 14, fontWeight: '300'},
+  miMensajeText: {color: colors.purple, fontSize: 14, fontWeight: '300'},
   fechaText: {color: colors.light, fontSize: 12, fontWeight: '300'},
 });

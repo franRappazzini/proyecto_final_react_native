@@ -6,7 +6,7 @@ import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
 
 export default function Sala({sala, onPress, infoSala}) {
-  const {name, id, description} = sala;
+  const {name, description} = sala;
 
   return (
     <Pressable
