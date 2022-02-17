@@ -4,6 +4,7 @@ export const GET_SALAS = 'GET_SALAS';
 export const GET_MESSAGES_SALA = 'GET_MESSAGES_SALA';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const CREATE_SALA = 'CREATE_SALA';
+export const GET_UNIQUE_SALA = 'GET_UNIQUE_SALA';
 
 const db = getDB();
 
@@ -66,5 +67,12 @@ export function createSala(sala) {
     } catch (err) {
       console.warn(err);
     }
+  };
+}
+
+export function getUniqueSala(uniqueSala) {
+  return dispatch => {
+    // console.warn('uniqueSala', uniqueSala);
+    dispatch({type: GET_UNIQUE_SALA, uniqueSala});
   };
 }

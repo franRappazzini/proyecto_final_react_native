@@ -1,6 +1,7 @@
 const initialState = {
   salas: [],
   mensajes: [],
+  uniqueSala: {},
 };
 
 export const SalaReducer = (state = initialState, action) => {
@@ -9,6 +10,8 @@ export const SalaReducer = (state = initialState, action) => {
       return {...state, salas: action.salas};
     case 'GET_MESSAGES_SALA':
       return {...state, mensajes: action.mensajes};
+    case 'GET_UNIQUE_SALA':
+      return {...state, uniqueSala: action.uniqueSala};
     default:
       return state;
   }

@@ -16,20 +16,21 @@ import InputEnviarMensaje from '../../../components/molecules/InputEnviarMensaje
 import MensajeSala from '../../../components/molecules/MensajeSala/MensajeSala';
 import {fecha} from '../../../utils/functions/functions';
 
-export default function SalaScreen({sala, navigation}) {
+export default function SalaScreen({navigation}) {
   const [nuevoMensaje, setNuevoMensaje] = useState('');
   const user = useSelector(state => state.user.user);
   const mensajes = useSelector(state => state.sala.mensajes);
+  const uniqueSala = useSelector(state => state.sala.uniqueSala);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMensajesSala(sala.sala.id));
-  }, [dispatch, sala.sala.id]);
+    dispatch(getMensajesSala(uniqueSala.id));
+  }, [dispatch, uniqueSala]);
 
   function enviarMensaje() {
     if (nuevoMensaje.trim() !== '') {
       dispatch(
-        createMensajeSala(sala.sala.id, {
+        createMensajeSala(uniqueSala.id, {
           message: nuevoMensaje.trim(),
           username: user.username,
           day: fecha().day,
@@ -45,7 +46,9 @@ export default function SalaScreen({sala, navigation}) {
       {mensajes && mensajes.length < 1 && (
         <ActivityIndicator size="large" color={colors.purple} />
       )}
+
       {!mensajes && <Text>No hay mensajes</Text>}
+
       {mensajes && mensajes.length > 0 && (
         <FlatList
           data={mensajes}

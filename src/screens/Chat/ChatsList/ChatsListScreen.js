@@ -34,7 +34,7 @@ export default function ChatsListScreen({navigation}) {
             }}
           />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => Object.values(item)[0].id}
       />
     </View>
   );
