@@ -9,6 +9,8 @@ export default function ChatList({chats, onPress}) {
   const user = useSelector(state => state.user.user);
   const chat = Object.values(chats);
 
+  // console.warn(chats);
+
   const ultimoMensaje = chat[chat.length - 1];
 
   function verificarMensaje() {

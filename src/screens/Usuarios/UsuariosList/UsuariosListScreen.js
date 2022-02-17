@@ -1,15 +1,17 @@
 import {FlatList, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import React from 'react';
 import Usuarios from '../../../components/molecules/Usuarios/Usuarios';
 import {styleContainer} from '../../../utils/constants/themes';
-import {useSelector} from 'react-redux';
+import {userChat} from '../../../redux/actions/UserActions';
 
 export default function UsuariosListScreen({navigation}) {
   const usuarios = useSelector(state => state.user.users);
   const user = useSelector(state => state.user.user);
   // todos los usuarios menos el que inicio sesion
   const otrosUsuarios = usuarios.filter(usuario => usuario.id !== user.id);
+  const dispatch = useDispatch();
 
   return (
     <View style={styleContainer}>
@@ -21,15 +23,16 @@ export default function UsuariosListScreen({navigation}) {
               username={item.username}
               nombre={item.nombre}
               apellido={item.apellido}
-              onPress={() =>
+              onPress={() => {
+                dispatch(userChat(item));
                 navigation.navigate('ChatNav', {
                   // nombre: item.nombre,
                   // apellido: item.apellido,
                   // email: item.email,
-                  id: item.id,
+                  // id: item.id,
                   username: item.username,
-                })
-              }
+                });
+              }}
               navigation={() =>
                 navigation.navigate('InfoUsuariosNav', {
                   nombre: item.nombre,

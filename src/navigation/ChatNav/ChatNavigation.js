@@ -17,7 +17,7 @@ export default function ChatNavigation({route}) {
       }}>
       <Stack.Screen
         name="ChatScreen"
-        component={() => <ChatScreen route={route} />}
+        component={ChatScreen}
         options={{title: route.params.username}}
       />
 

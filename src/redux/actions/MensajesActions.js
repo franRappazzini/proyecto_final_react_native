@@ -5,7 +5,7 @@ export const GET_MENSAJES = 'GET_MENSAJES';
 const db = getDB();
 
 export function getMensajes(id, username) {
-  console.warn(id, username);
+  // console.warn(id, username);
   return async dispatch => {
     db.ref(`users/${id}/chats/${username}`).on('value', data => {
       const mensajes = data.val()

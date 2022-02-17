@@ -1,4 +1,4 @@
-import {FlatList, KeyboardAvoidingView, View} from 'react-native';
+import {FlatList, KeyboardAvoidingView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
   createMensaje,
@@ -12,16 +12,18 @@ import {styleContainer} from '../../../utils/constants/themes';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
-export default function ChatScreen({route, navigation}) {
+export default function ChatScreen({navigation}) {
   const [nuevoMensaje, setNuevoMensaje] = useState('');
   const user = useSelector(state => state.user.user);
   const mensajes = useSelector(state => state.mensajes);
-  const {id, username} = route.params;
+  const userChat = useSelector(state => state.user.userChat);
   const dispatch = useDispatch();
 
+  console.warn(userChat);
+
   useEffect(() => {
-    dispatch(getMensajes(user.id, username));
-  }, [dispatch, user.id, username]);
+    dispatch(getMensajes(user.id, userChat.username));
+  }, [dispatch, user.id, userChat.username]);
 
   function enviarMensaje() {
     if (nuevoMensaje.trim() !== '') {
@@ -32,10 +34,10 @@ export default function ChatScreen({route, navigation}) {
         hour: fecha().hour,
       };
 
-      console.warn(mensaje.username);
+      // console.warn(mensaje.username);
 
-      dispatch(createMensaje(user.id, username, mensaje));
-      dispatch(createMensaje(id, user.username, mensaje));
+      dispatch(createMensaje(user.id, userChat.username, mensaje));
+      dispatch(createMensaje(userChat.id, user.username, mensaje));
       setNuevoMensaje('');
     }
   }

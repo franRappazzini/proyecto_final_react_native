@@ -1,4 +1,4 @@
-const initialState = {user: {}, users: []};
+const initialState = {user: {}, users: [], userChat: {}};
 
 export const UserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ export const UserReducer = (state = initialState, action) => {
       return {...state, users: action.users};
     case 'CREATE_USER':
       return state;
+    case 'USER_MESSAGE':
+      return {...state, userChat: action.user};
     default:
       return state;
   }

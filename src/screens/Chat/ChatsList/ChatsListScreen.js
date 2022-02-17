@@ -1,46 +1,41 @@
 import {FlatList, ScrollView} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
 import React from 'react';
 import {styleContainer} from '../../../utils/constants/themes';
-import {useSelector} from 'react-redux';
+import {userChat} from '../../../redux/actions/UserActions';
 
 export default function ChatsListScreen({navigation}) {
   const user = useSelector(state => state.user.user);
-  const usuarios = useSelector(state => state.user.users);
+  const users = useSelector(state => state.user.users);
+  const dispatch = useDispatch();
 
-  // console.warn(usuarios);
+  const chats = Object.values(user.chats);
 
-  // const userChats = user.chats.forEach(chat =>
-  //   Object.keys(chat).map(key => ({...chat[key], id: key})),
-  // );
-
-  // const chats = Object.keys(user.chats).map(key => ({
-  //   ...user.chats[key],
-  //   id: key,
-  // }));
-
-  console.warn(user.chats);
-
-  // seguir con nabigation.navigate aca
+  // busca el usuario que selecciono para ir al chat
+  function comprobarUsuario(item) {
+    const userFilter = users.filter(u => u.username === item);
+    userFilter !== [] && dispatch(userChat(userFilter[0]));
+  }
 
   return (
     <ScrollView style={styleContainer}>
-      {/* <FlatList
+      <FlatList
         data={chats}
         renderItem={({item}) => (
           <ChatList
             chats={item}
-            onPress={() =>
+            onPress={() => {
+              comprobarUsuario(Object.values(item)[0].username);
               navigation.navigate('ChatNav', {
-                id: user.id,
-                username: user.username,
-              })
-            }
+                username: Object.values(item)[0].username,
+              });
+            }}
           />
         )}
         keyExtractor={item => item.id}
-      /> */}
+      />
     </ScrollView>
   );
 }

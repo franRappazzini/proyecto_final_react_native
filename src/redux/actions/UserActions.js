@@ -3,6 +3,7 @@ import {getDB} from '../../utils/services/db';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
+export const USER_MESSAGE = 'USER_MESSAGE';
 
 const db = getDB();
 
@@ -49,5 +50,11 @@ export function newUser(nombre, apellido, email, username, password) {
     });
 
     dispatch({type: CREATE_USER});
+  };
+}
+
+export function userChat(user) {
+  return dispatch => {
+    dispatch({type: 'USER_MESSAGE', user});
   };
 }
