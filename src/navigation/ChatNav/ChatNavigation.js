@@ -3,10 +3,13 @@ import MensajeDetallesScreen from '../../screens/Chat/MensajeDetalles/MensajeDet
 import React from 'react';
 import {colors} from '../../utils/constants/themes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
-export default function ChatNavigation({route}) {
+export default function ChatNavigation() {
+  const userChat = useSelector(state => state.user.userChat);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,7 +21,7 @@ export default function ChatNavigation({route}) {
       <Stack.Screen
         name="ChatScreen"
         component={ChatScreen}
-        options={{title: route.params.username}}
+        options={{title: userChat.username}}
       />
 
       <Stack.Screen

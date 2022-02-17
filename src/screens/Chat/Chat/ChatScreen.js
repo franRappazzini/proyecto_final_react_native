@@ -19,8 +19,6 @@ export default function ChatScreen({navigation}) {
   const userChat = useSelector(state => state.user.userChat);
   const dispatch = useDispatch();
 
-  console.warn(userChat);
-
   useEffect(() => {
     dispatch(getMensajes(user.id, userChat.username));
   }, [dispatch, user.id, userChat.username]);
@@ -33,8 +31,6 @@ export default function ChatScreen({navigation}) {
         day: fecha().day,
         hour: fecha().hour,
       };
-
-      // console.warn(mensaje.username);
 
       dispatch(createMensaje(user.id, userChat.username, mensaje));
       dispatch(createMensaje(userChat.id, user.username, mensaje));

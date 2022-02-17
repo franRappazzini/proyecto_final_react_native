@@ -26,20 +26,13 @@ export default function UsuariosListScreen({navigation}) {
               onPress={() => {
                 dispatch(userChat(item));
                 navigation.navigate('ChatNav', {
-                  // nombre: item.nombre,
-                  // apellido: item.apellido,
-                  // email: item.email,
-                  // id: item.id,
                   username: item.username,
                 });
               }}
-              navigation={() =>
-                navigation.navigate('InfoUsuariosNav', {
-                  nombre: item.nombre,
-                  apellido: item.apellido,
-                  username: item.username,
-                })
-              }
+              navigation={() => {
+                dispatch(userChat(item));
+                navigation.navigate('InfoUsuariosNav');
+              }}
             />
           )}
         />

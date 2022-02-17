@@ -21,7 +21,6 @@ export default function IniciarSesionScreen({navigation}) {
     );
 
     const usuario = usuarios[indexUsuario];
-    console.warn(usuario);
 
     if (usuario && contrasenia === usuario.password) {
       dispatch(getUser(usuario));

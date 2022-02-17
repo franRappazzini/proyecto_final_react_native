@@ -1,4 +1,4 @@
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
@@ -20,7 +20,7 @@ export default function ChatsListScreen({navigation}) {
   }
 
   return (
-    <ScrollView style={styleContainer}>
+    <View style={styleContainer}>
       <FlatList
         data={chats}
         renderItem={({item}) => (
@@ -36,6 +36,6 @@ export default function ChatsListScreen({navigation}) {
         )}
         keyExtractor={item => item.id}
       />
-    </ScrollView>
+    </View>
   );
 }
