@@ -32,7 +32,7 @@ export default function IniciarSesionScreen({navigation}) {
 
   return (
     <View style={styleContainer}>
-      <Text>Bienvenido nuevamente! 😎</Text>
+      <Text style={styles.welcomeText}>Bienvenido nuevamente! 😎</Text>
 
       <View style={styles.inputsContainer}>
         <TextLabel text="Username o email" />
