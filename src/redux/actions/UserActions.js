@@ -4,6 +4,8 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_USER = 'GET_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const USER_MESSAGE = 'USER_MESSAGE';
+export const USER_FAVORITE_ADD = 'USER_FAVORITE_ADD';
+export const USER_FAVORITE_REMOVE = 'USER_FAVORITE_REMOVE';
 
 const db = getDB();
 
@@ -55,6 +57,24 @@ export function newUser(nombre, apellido, email, username, password) {
 
 export function userChat(user) {
   return dispatch => {
-    dispatch({type: 'USER_MESSAGE', user});
+    dispatch({type: USER_MESSAGE, user});
+  };
+}
+
+export function addUserToFav(userFav) {
+  return dispatch => {
+    dispatch({
+      type: USER_FAVORITE_ADD,
+      userFav,
+    });
+  };
+}
+
+export function removeUserToFav(userFav) {
+  return dispatch => {
+    dispatch({
+      type: USER_FAVORITE_REMOVE,
+      userFav,
+    });
   };
 }

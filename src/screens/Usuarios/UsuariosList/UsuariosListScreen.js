@@ -1,17 +1,28 @@
-import {FlatList, Text, View} from 'react-native';
+import {
+  FlatList,
+  KeyboardAvoidingView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {
+  addUserToFav,
+  removeUserToFav,
+  userChat,
+} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import Usuarios from '../../../components/molecules/Usuarios/Usuarios';
 import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
-import {userChat} from '../../../redux/actions/UserActions';
 
 export default function UsuariosListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
   const usuarios = useSelector(state => state.user.users);
   const user = useSelector(state => state.user.user);
+  const usersFav = useSelector(state => state.user.usersFav);
   // todos los usuarios menos el que inicio sesion
   const otrosUsuarios = usuarios.filter(usuario => usuario.id !== user.id);
   const dispatch = useDispatch();
@@ -27,10 +38,6 @@ export default function UsuariosListScreen({navigation}) {
         )
       : otrosUsuarios;
 
-  useEffect(() => {
-    console.warn(busquedaUsers);
-  }, [busquedaUsers]);
-
   return (
     <View style={styleContainer}>
       <View style={styles.inputContainer}>
@@ -41,6 +48,31 @@ export default function UsuariosListScreen({navigation}) {
           autoCapitalize="none"
         />
       </View>
+
+      {usersFav.length > 0 && (
+        <FlatList
+          data={usersFav}
+          renderItem={({item}) => (
+            <Usuarios
+              username={item.username}
+              nombre={item.nombre}
+              apellido={item.apellido}
+              onPress={() => {
+                dispatch(userChat(item));
+                navigation.navigate('ChatNav', {
+                  username: item.username,
+                });
+              }}
+              navigation={() => {
+                dispatch(userChat(item));
+                navigation.navigate('InfoUsuariosNav');
+              }}
+              eliminarFavorito={() => dispatch(removeUserToFav(item))}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+      )}
 
       {busquedaUsers && busquedaUsers.length > 0 ? (
         <FlatList
@@ -60,6 +92,8 @@ export default function UsuariosListScreen({navigation}) {
                 dispatch(userChat(item));
                 navigation.navigate('InfoUsuariosNav');
               }}
+              agregarFavorito={() => dispatch(addUserToFav(item))}
+              eliminarFavorito={() => dispatch(removeUserToFav(item))}
             />
           )}
         />

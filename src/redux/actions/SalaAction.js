@@ -72,7 +72,6 @@ export function createSala(sala) {
 
 export function getUniqueSala(uniqueSala) {
   return dispatch => {
-    // console.warn('uniqueSala', uniqueSala);
     dispatch({type: GET_UNIQUE_SALA, uniqueSala});
   };
 }

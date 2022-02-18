@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
+import {useSelector} from 'react-redux';
 
 export default function Usuarios({
   username,
@@ -11,7 +12,37 @@ export default function Usuarios({
   apellido,
   navigation,
   onPress,
+  agregarFavorito,
+  eliminarFavorito,
 }) {
+  const usersFav = useSelector(state => state.user.usersFav);
+
+  function verificarFav() {
+    const userFind = usersFav.findIndex(user => user.username === username);
+
+    if (userFind !== -1) {
+      return (
+        <Ionicons
+          name="close-circle"
+          size={25}
+          color={colors.red}
+          onPress={eliminarFavorito}
+          style={styles.iconHeart}
+        />
+      );
+    } else {
+      return (
+        <Ionicons
+          name="heart"
+          size={25}
+          color={colors.purple}
+          onPress={agregarFavorito}
+          style={styles.iconHeart}
+        />
+      );
+    }
+  }
+
   return (
     <Pressable
       onPress={onPress}
@@ -45,13 +76,14 @@ export default function Usuarios({
             onPress={navigation}
             style={styles.iconInfo}
           />
-          <Ionicons
+          {/* <Ionicons
             name="heart"
             size={25}
             color={colors.purple}
-            onPress={() => {}}
+            onPress={agregarFavorito}
             style={styles.iconHeart}
-          />
+          /> */}
+          {verificarFav()}
         </View>
       </View>
     </Pressable>
