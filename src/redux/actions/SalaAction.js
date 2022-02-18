@@ -80,7 +80,6 @@ export function deleteSala(salaId) {
 
       dispatch({
         type: DELETE_SALA,
-        salaId,
       });
     } catch (err) {
       console.warn(err);
@@ -103,5 +102,17 @@ export function addSalaToFav(salaFav) {
 export function removeSalaFromFav(salaFav) {
   return dispatch => {
     dispatch({type: SALA_FAVORITE_REMOVE, salaFav});
+  };
+}
+
+export function deleteMensajeSala(salaId, mensajeId) {
+  return dispatch => {
+    try {
+      db.ref(`salas/${salaId}/messages/${mensajeId}`).remove();
+
+      dispatch({type: DELETE_SALA});
+    } catch (err) {
+      console.warn(err);
+    }
   };
 }

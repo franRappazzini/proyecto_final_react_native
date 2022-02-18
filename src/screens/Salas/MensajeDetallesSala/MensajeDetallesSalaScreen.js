@@ -1,39 +1,42 @@
 import {ImageBackground, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MensajeSala from '../../../components/molecules/MensajeSala/MensajeSala';
+import {deleteMensajeSala} from '../../../redux/actions/SalaAction';
 import {styles} from '../../Chat/MensajeDetalles/styles';
-import {useSelector} from 'react-redux';
 
-export default function MensajeDetallesSalaScreen({route}) {
-  const [mismoUser, setMismoUser] = useState(false);
+export default function MensajeDetallesSalaScreen({route, navigation}) {
   const user = useSelector(state => state.user.user);
+  const uniqueSala = useSelector(state => state.sala.uniqueSala);
   const {mensaje} = route.params;
+  const dispatch = useDispatch();
 
-  useEffect(() => {
+  function verificarCreador() {
     // comprueba si el mensaje es del usuario para poder eliminarlo
     if (user.username === mensaje.username) {
-      setMismoUser(true);
-    } else {
-      setMismoUser(false);
+      return (
+        <Ionicons
+          name="trash-outline"
+          size={30}
+          color={colors.red}
+          onPress={() => {
+            dispatch(deleteMensajeSala(uniqueSala.id, mensaje.id));
+            navigation.goBack();
+          }}
+        />
+      );
     }
-  }, [user, mensaje]);
+  }
 
   return (
     <View style={styleContainer}>
       <ImageBackground
         source={require('../../../assets/img/background-chat.jpg')}
         style={styles.mensajeContainer}>
-        {mismoUser && (
-          <Ionicons
-            name="trash-outline"
-            size={30}
-            color={colors.red}
-            onPress={() => {}}
-          />
-        )}
+        {verificarCreador()}
         <MensajeSala mensaje={mensaje} />
       </ImageBackground>
     </View>

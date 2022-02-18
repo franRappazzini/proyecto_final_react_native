@@ -20,11 +20,6 @@ export const SalaReducer = (state = initialState, action) => {
         ...state,
         salasFav: state.salasFav.filter(sala => sala.id !== action.salaFav.id),
       };
-    case 'DELETE_SALA':
-      return {
-        ...state,
-        salas: state.salas.filter(sala => sala.id !== action.salaId),
-      };
     default:
       return state;
   }

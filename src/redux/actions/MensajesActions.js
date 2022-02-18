@@ -1,6 +1,8 @@
 import {getDB} from '../../utils/services/db';
 
 export const GET_MENSAJES = 'GET_MENSAJES';
+export const CREATE_MENSAJE = 'CREATE_MENSAJE';
+export const DELETE_MENSAJE = 'DELETE_MENSAJE';
 
 const db = getDB();
 
@@ -32,10 +34,24 @@ export function createMensaje(id, username, mensaje) {
       });
 
       dispatch({
-        type: GET_MENSAJES,
+        type: CREATE_MENSAJE,
       });
     } catch (err) {
       console.warn('ERROR', err);
     }
   };
 }
+
+// export function deleteMensaje(userId, username, mensajeId) {
+//   return dispatch => {
+//     try {
+//       db.ref(`users/${userId}/chats/${username}/${mensajeId}`).;
+
+//       dispatch({
+//         type: DELETE_MENSAJE,
+//       });
+//     } catch (err) {
+//       console.warn(err);
+//     }
+//   };
+// }

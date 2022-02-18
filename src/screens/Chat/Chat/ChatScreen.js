@@ -1,9 +1,4 @@
-import {
-  FlatList,
-  ImageBackground,
-  KeyboardAvoidingView,
-  View,
-} from 'react-native';
+import {FlatList, ImageBackground, KeyboardAvoidingView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
   createMensaje,
@@ -13,7 +8,6 @@ import {
 import InputEnviarMensaje from '../../../components/molecules/InputEnviarMensaje/InputEnviarMensaje';
 import MensajeChat from '../../../components/molecules/MensajeChat/MensajeChat';
 import {fecha} from '../../../utils/functions/functions';
-import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
