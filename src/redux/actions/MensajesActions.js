@@ -5,7 +5,7 @@ export const GET_MENSAJES = 'GET_MENSAJES';
 const db = getDB();
 
 export function getMensajes(id, username) {
-  return async dispatch => {
+  return dispatch => {
     db.ref(`users/${id}/chats/${username}`).on('value', data => {
       const mensajes = data.val()
         ? Object.keys(data.val()).map(key => ({...data.val()[key], id: key}))

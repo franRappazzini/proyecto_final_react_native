@@ -48,7 +48,9 @@ export default function ChatScreen({navigation}) {
               mensaje={item.message}
               hora={item.hour}
               username={item.username}
-              onLongPress={() => navigation.navigate('MensajeDetallesScreen')}
+              onLongPress={() =>
+                navigation.navigate('MensajeDetallesScreen', {mensaje: item})
+              }
             />
           )}
           keyExtractor={item => item.id}

@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-export default function InfoSalaNavigation({route}) {
+export default function InfoSalaNavigation() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -14,7 +14,7 @@ export default function InfoSalaNavigation({route}) {
       }}>
       <Stack.Screen
         name="InfoSalaScreen"
-        component={() => <InfoSalaScreen sala={route.params} />}
+        component={InfoSalaScreen}
         options={{title: 'Info. de sala'}}
       />
     </Stack.Navigator>

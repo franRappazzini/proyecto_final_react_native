@@ -5,4 +5,8 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
+  iconContainer: {
+    marginTop: 10,
+    alignItems: 'center',
+  },
 });
