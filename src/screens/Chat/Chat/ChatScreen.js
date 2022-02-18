@@ -1,4 +1,9 @@
-import {FlatList, KeyboardAvoidingView} from 'react-native';
+import {
+  FlatList,
+  ImageBackground,
+  KeyboardAvoidingView,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
   createMensaje,
@@ -9,6 +14,7 @@ import InputEnviarMensaje from '../../../components/molecules/InputEnviarMensaje
 import MensajeChat from '../../../components/molecules/MensajeChat/MensajeChat';
 import {fecha} from '../../../utils/functions/functions';
 import {styleContainer} from '../../../utils/constants/themes';
+import {styles} from './styles';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 
@@ -39,29 +45,32 @@ export default function ChatScreen({navigation}) {
   }
 
   return (
-    <KeyboardAvoidingView style={styleContainer}>
-      {mensajes && mensajes.length > 0 && (
-        <FlatList
-          data={mensajes}
-          renderItem={({item}) => (
-            <MensajeChat
-              mensaje={item.message}
-              hora={item.hour}
-              username={item.username}
-              onLongPress={() =>
-                navigation.navigate('MensajeDetallesScreen', {mensaje: item})
-              }
-            />
-          )}
-          keyExtractor={item => item.id}
-        />
-      )}
+    <ImageBackground
+      source={require('../../../assets/img/background-chat.jpg')}>
+      <KeyboardAvoidingView style={styles.chatContainer}>
+        {mensajes && mensajes.length > 0 && (
+          <FlatList
+            data={mensajes}
+            renderItem={({item}) => (
+              <MensajeChat
+                mensaje={item.message}
+                hora={item.hour}
+                username={item.username}
+                onLongPress={() =>
+                  navigation.navigate('MensajeDetallesScreen', {mensaje: item})
+                }
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+        )}
 
-      <InputEnviarMensaje
-        value={nuevoMensaje.trimStart()}
-        onChangeText={setNuevoMensaje}
-        onPress={enviarMensaje}
-      />
-    </KeyboardAvoidingView>
+        <InputEnviarMensaje
+          value={nuevoMensaje.trimStart()}
+          onChangeText={setNuevoMensaje}
+          onPress={enviarMensaje}
+        />
+      </KeyboardAvoidingView>
+    </ImageBackground>
   );
 }

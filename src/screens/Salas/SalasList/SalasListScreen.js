@@ -1,7 +1,12 @@
 import {FlatList, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {
+  addSalaToFav,
+  getSalas,
+  getUniqueSala,
+  removeSalaFromFav,
+} from '../../../redux/actions/SalaAction';
 import {colors, styleContainer} from '../../../utils/constants/themes';
-import {getSalas, getUniqueSala} from '../../../redux/actions/SalaAction';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
@@ -13,6 +18,7 @@ import {styles} from './styles';
 export default function SalasListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
   const salas = useSelector(state => state.sala.salas);
+  const salasFav = useSelector(state => state.sala.salasFav);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,6 +54,27 @@ export default function SalasListScreen({navigation}) {
         />
       </View>
 
+      {salasFav && salasFav.length > 0 && (
+        <FlatList
+          data={salasFav}
+          renderItem={({item}) => (
+            <Sala
+              sala={item}
+              onPress={() => {
+                dispatch(getUniqueSala(item));
+                navigation.navigate('SalasNav');
+              }}
+              infoSala={() => {
+                dispatch(getUniqueSala(item));
+                navigation.navigate('InfoSalaNav');
+              }}
+              eliminarFavorito={() => dispatch(removeSalaFromFav(item))}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+      )}
+
       {busquedaSala && busquedaSala.length > 0 ? (
         <FlatList
           data={busquedaSala}
@@ -62,6 +89,8 @@ export default function SalasListScreen({navigation}) {
                 dispatch(getUniqueSala(item));
                 navigation.navigate('InfoSalaNav');
               }}
+              agregarFavorito={() => dispatch(addSalaToFav(item))}
+              eliminarFavorito={() => dispatch(removeSalaFromFav(item))}
             />
           )}
           keyExtractor={item => item.id}

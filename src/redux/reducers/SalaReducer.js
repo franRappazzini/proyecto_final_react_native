@@ -2,6 +2,7 @@ const initialState = {
   salas: [],
   mensajes: [],
   uniqueSala: {},
+  salasFav: [],
 };
 
 export const SalaReducer = (state = initialState, action) => {
@@ -12,6 +13,18 @@ export const SalaReducer = (state = initialState, action) => {
       return {...state, mensajes: action.mensajes};
     case 'GET_UNIQUE_SALA':
       return {...state, uniqueSala: action.uniqueSala};
+    case 'SALA_FAVORITE_ADD':
+      return {...state, salasFav: [...state.salasFav, action.salaFav]};
+    case 'SALA_FAVORITE_REMOVE':
+      return {
+        ...state,
+        salasFav: state.salasFav.filter(sala => sala.id !== action.salaFav.id),
+      };
+    case 'DELETE_SALA':
+      return {
+        ...state,
+        salas: state.salas.filter(sala => sala.id !== action.salaId),
+      };
     default:
       return state;
   }

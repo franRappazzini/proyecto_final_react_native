@@ -1,9 +1,9 @@
+import {ImageBackground, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MensajeSala from '../../../components/molecules/MensajeSala/MensajeSala';
-import {View} from 'react-native';
 import {styles} from '../../Chat/MensajeDetalles/styles';
 import {useSelector} from 'react-redux';
 
@@ -23,7 +23,9 @@ export default function MensajeDetallesSalaScreen({route}) {
 
   return (
     <View style={styleContainer}>
-      <View style={styles.mensajeContainer}>
+      <ImageBackground
+        source={require('../../../assets/img/background-chat.jpg')}
+        style={styles.mensajeContainer}>
         {mismoUser && (
           <Ionicons
             name="trash-outline"
@@ -33,7 +35,7 @@ export default function MensajeDetallesSalaScreen({route}) {
           />
         )}
         <MensajeSala mensaje={mensaje} />
-      </View>
+      </ImageBackground>
     </View>
   );
 }

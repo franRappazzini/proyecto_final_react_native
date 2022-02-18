@@ -4,9 +4,43 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
+import {useSelector} from 'react-redux';
 
-export default function Sala({sala, onPress, infoSala}) {
-  const {name, description} = sala;
+export default function Sala({
+  sala,
+  onPress,
+  infoSala,
+  agregarFavorito,
+  eliminarFavorito,
+}) {
+  const salasFav = useSelector(state => state.sala.salasFav);
+  const {id, name, description} = sala;
+
+  function verificarFav() {
+    const salaFind = salasFav.findIndex(salaFav => salaFav.id === id);
+
+    if (salaFind !== -1) {
+      return (
+        <Ionicons
+          name="close-circle"
+          size={25}
+          color={colors.red}
+          onPress={eliminarFavorito}
+          style={styles.iconHeart}
+        />
+      );
+    } else {
+      return (
+        <Ionicons
+          name="heart"
+          size={25}
+          color={colors.purple}
+          onPress={agregarFavorito}
+          style={styles.iconHeart}
+        />
+      );
+    }
+  }
 
   return (
     <Pressable
@@ -28,12 +62,7 @@ export default function Sala({sala, onPress, infoSala}) {
           style={styles.iconInfo}
           onPress={infoSala}
         />
-        <Ionicons
-          name="heart"
-          color={colors.purple}
-          size={25}
-          style={styles.iconHeart}
-        />
+        {verificarFav()}
       </View>
     </Pressable>
   );

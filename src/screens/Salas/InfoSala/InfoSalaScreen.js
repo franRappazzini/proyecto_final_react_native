@@ -1,17 +1,39 @@
 import {Text, View} from 'react-native';
 import {colors, styleContainer} from '../../../utils/constants/themes';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
+import {deleteSala} from '../../../redux/actions/SalaAction';
 import {styles} from './styles';
-import {useSelector} from 'react-redux';
 
-export default function InfoSalaScreen() {
+export default function InfoSalaScreen({navigation}) {
   const uniqueSala = useSelector(state => state.sala.uniqueSala);
+  const user = useSelector(state => state.user.user);
+  const dispatch = useDispatch();
 
   const arrayMensajes = uniqueSala.messages
     ? Object.values(uniqueSala.messages)
     : [];
+
+  // verfica el creado para permitir eliminar la sala
+  function verificarCreador() {
+    if (uniqueSala.createdBy === user.username) {
+      return (
+        <View style={styles.iconContainer}>
+          <Ionicons
+            name="trash-outline"
+            color={colors.red}
+            size={30}
+            onPress={() => {
+              dispatch(deleteSala(uniqueSala.id));
+              navigation.goBack();
+            }}
+          />
+        </View>
+      );
+    }
+  }
 
   return (
     <View style={styleContainer}>
@@ -21,9 +43,7 @@ export default function InfoSalaScreen() {
       <Text style={styles.text}>Mensajes: {arrayMensajes.length}</Text>
       <Text style={styles.text}>Fecha: {uniqueSala.date}</Text>
 
-      <View style={styles.iconContainer}>
-        <Ionicons name="trash-outline" color={colors.red} size={30} />
-      </View>
+      {verificarCreador()}
     </View>
   );
 }

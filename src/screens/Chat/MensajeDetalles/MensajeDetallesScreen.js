@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {ImageBackground, Text, View} from 'react-native';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,12 +23,14 @@ export default function MensajeDetallesScreen({route}) {
 
   return (
     <View style={styleContainer}>
-      <View style={verificarMensaje()}>
+      <ImageBackground
+        source={require('../../../assets/img/background-chat.jpg')}
+        style={verificarMensaje()}>
         {user.username === username && (
           <Ionicons name="trash-outline" size={30} color={colors.red} />
         )}
         <MensajeChat mensaje={message} username={username} hora={hour} />
-      </View>
+      </ImageBackground>
 
       <Text>Enviado por: {username}</Text>
       <Text>
