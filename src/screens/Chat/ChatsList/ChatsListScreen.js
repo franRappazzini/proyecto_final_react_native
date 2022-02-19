@@ -1,4 +1,4 @@
-import {FlatList, ScrollView, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
@@ -11,8 +11,11 @@ export default function ChatsListScreen({navigation}) {
   const users = useSelector(state => state.user.users);
   const dispatch = useDispatch();
 
-  const chats = Object.keys(user.chats).map(key => ({
-    ...user.chats[key],
+  // actualiza en tiempo real el chat del usuario para mostrar el ultimo mensaje en la lista de chats
+  const userActualizado = users.find(u => u.username === user.username);
+
+  const chats = Object.keys(userActualizado.chats).map(key => ({
+    ...userActualizado.chats[key],
     id: key,
   }));
 
