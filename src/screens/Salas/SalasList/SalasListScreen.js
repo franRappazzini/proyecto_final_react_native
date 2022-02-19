@@ -14,6 +14,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sala from '../../../components/molecules/Sala/Sala';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import {styles} from './styles';
+import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
 
 export default function SalasListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
@@ -37,15 +38,7 @@ export default function SalasListScreen({navigation}) {
 
   return (
     <View style={styleContainer}>
-      <View style={styles.crearSalaContainer}>
-        <BtnCustom
-          text={<Ionicons name="add" color={colors.light} size={30} />}
-          color={colors.purple}
-          onPress={() => navigation.navigate('CrearSalaNav')}
-        />
-      </View>
-
-      <View>
+      <View style={styles.inputContainer}>
         <TextInputCustom
           placeholder="Buscar salas"
           value={busqueda}
@@ -54,27 +47,35 @@ export default function SalasListScreen({navigation}) {
         />
       </View>
 
-      {salasFav && salasFav.length > 0 && (
-        <FlatList
-          data={salasFav}
-          renderItem={({item}) => (
-            <Sala
-              sala={item}
-              onPress={() => {
-                dispatch(getUniqueSala(item));
-                navigation.navigate('SalasNav');
-              }}
-              infoSala={() => {
-                dispatch(getUniqueSala(item));
-                navigation.navigate('InfoSalaNav');
-              }}
-              eliminarFavorito={() => dispatch(removeSalaFromFav(item))}
+      <Dropbox
+        text="Favoritas"
+        children={
+          salasFav && salasFav.length > 0 ? (
+            <FlatList
+              data={salasFav}
+              renderItem={({item}) => (
+                <Sala
+                  sala={item}
+                  onPress={() => {
+                    dispatch(getUniqueSala(item));
+                    navigation.navigate('SalasNav');
+                  }}
+                  infoSala={() => {
+                    dispatch(getUniqueSala(item));
+                    navigation.navigate('InfoSalaNav');
+                  }}
+                  eliminarFavorito={() => dispatch(removeSalaFromFav(item))}
+                />
+              )}
+              keyExtractor={item => item.id}
             />
-          )}
-          keyExtractor={item => item.id}
-        />
-      )}
-
+          ) : (
+            <Text style={styles.textNoFav}>No hay salas favoritas</Text>
+          )
+        }
+        onPress={() => navigation.navigate('CrearSalaNav')}
+        btnVisible={true}
+      />
       {busquedaSala && busquedaSala.length > 0 ? (
         <FlatList
           data={busquedaSala}

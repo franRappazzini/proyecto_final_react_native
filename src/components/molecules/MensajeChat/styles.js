@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: 'row',
     alignSelf: 'flex-start',
+    marginRight: 100,
     marginBottom: 3,
   },
   miMensajeContainer: {
@@ -16,6 +17,7 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: 'row',
     alignSelf: 'flex-end',
+    marginLeft: 100,
     marginBottom: 3,
   },
   mensajeText: {

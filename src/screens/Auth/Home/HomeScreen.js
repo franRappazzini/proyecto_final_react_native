@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StatusBar, Text, View} from 'react-native';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import LogoGroupChat from '../../../assets/svg/LogoGroupChat';
@@ -11,9 +11,7 @@ import {styles} from './styles';
 export default function HomeScreen({navigation}) {
   return (
     <View style={styles.screenContainer}>
-      {/* <Text style={{fontSize: 20, color: colors.light, textAlign: 'center'}}>
-        Bienvenido a msnapp
-      </Text> */}
+      <StatusBar backgroundColor={colors.dark} />
 
       <View style={styles.logosContainer}>
         <Text

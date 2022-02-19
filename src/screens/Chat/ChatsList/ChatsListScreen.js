@@ -1,9 +1,9 @@
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StatusBar, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
 import React from 'react';
-import {styleContainer} from '../../../utils/constants/themes';
+import {styleContainer, colors} from '../../../utils/constants/themes';
 import {userChat} from '../../../redux/actions/UserActions';
 import {styles} from './styles';
 
@@ -30,6 +30,8 @@ export default function ChatsListScreen({navigation}) {
 
   return (
     <View style={styleContainer}>
+      <StatusBar backgroundColor={colors.darkGrey} />
+
       {chats ? (
         <FlatList
           data={chats}

@@ -1,11 +1,5 @@
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
+import React, {useState} from 'react';
 import {
   addUserToFav,
   removeUserToFav,
@@ -17,6 +11,7 @@ import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInput
 import Usuarios from '../../../components/molecules/Usuarios/Usuarios';
 import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
+import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
 
 export default function UsuariosListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
@@ -49,30 +44,39 @@ export default function UsuariosListScreen({navigation}) {
         />
       </View>
 
-      {usersFav.length > 0 && (
-        <FlatList
-          data={usersFav}
-          renderItem={({item}) => (
-            <Usuarios
-              username={item.username}
-              nombre={item.nombre}
-              apellido={item.apellido}
-              onPress={() => {
-                dispatch(userChat(item));
-                navigation.navigate('ChatNav', {
-                  username: item.username,
-                });
-              }}
-              navigation={() => {
-                dispatch(userChat(item));
-                navigation.navigate('InfoUsuariosNav');
-              }}
-              eliminarFavorito={() => dispatch(removeUserToFav(item))}
+      <Dropbox
+        text="Favoritos"
+        children={
+          usersFav.length > 0 ? (
+            <FlatList
+              data={usersFav}
+              renderItem={({item}) => (
+                <Usuarios
+                  username={item.username}
+                  nombre={item.nombre}
+                  apellido={item.apellido}
+                  onPress={() => {
+                    dispatch(userChat(item));
+                    navigation.navigate('ChatNav', {
+                      username: item.username,
+                    });
+                  }}
+                  navigation={() => {
+                    dispatch(userChat(item));
+                    navigation.navigate('InfoUsuariosNav');
+                  }}
+                  eliminarFavorito={() => dispatch(removeUserToFav(item))}
+                />
+              )}
+              keyExtractor={item => item.id}
             />
-          )}
-          keyExtractor={item => item.id}
-        />
-      )}
+          ) : (
+            <Text style={styles.textNoUsuariosFav}>
+              No hay usuarios favoritos
+            </Text>
+          )
+        }
+      />
 
       {busquedaUsers && busquedaUsers.length > 0 ? (
         <FlatList
