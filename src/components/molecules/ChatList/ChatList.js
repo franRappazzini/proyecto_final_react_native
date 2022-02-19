@@ -9,17 +9,21 @@ export default function ChatList({chats, onPress}) {
   const user = useSelector(state => state.user.user);
   const chat = Object.values(chats);
 
+  // tomo el nombre del usuario que selecciono para ir al chat y lo saco del array
+  const userChat = chat.pop();
+
   const ultimoMensaje = chat[chat.length - 1];
 
   function verificarMensaje() {
+    // verifica si el ultimo mensaje es propio
     if (ultimoMensaje.username === user.username) {
-      return 'Tu:';
+      return 'Tu: ';
     }
   }
 
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => onPress(userChat)}
       style={({pressed}) => [
         {
           opacity: pressed ? 0.8 : 1,
@@ -36,9 +40,10 @@ export default function ChatList({chats, onPress}) {
 
       <View style={styles.infoContainer}>
         <View>
-          <Text style={styles.usernameText}>{chat[0].username}</Text>
+          <Text style={styles.usernameText}>{userChat}</Text>
           <Text style={styles.mensajeText}>
-            {verificarMensaje()} {ultimoMensaje.message}
+            {verificarMensaje()}
+            {ultimoMensaje.message}
           </Text>
         </View>
 

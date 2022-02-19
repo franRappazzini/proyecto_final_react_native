@@ -11,7 +11,10 @@ export default function ChatsListScreen({navigation}) {
   const users = useSelector(state => state.user.users);
   const dispatch = useDispatch();
 
-  const chats = Object.values(user.chats);
+  const chats = Object.keys(user.chats).map(key => ({
+    ...user.chats[key],
+    id: key,
+  }));
 
   // busca el usuario que selecciono para ir al chat
   function comprobarUsuario(item) {
@@ -26,15 +29,17 @@ export default function ChatsListScreen({navigation}) {
         renderItem={({item}) => (
           <ChatList
             chats={item}
-            onPress={() => {
-              comprobarUsuario(Object.values(item)[0].username);
+            onPress={userId => {
+              comprobarUsuario(userId);
               navigation.navigate('ChatNav', {
-                username: Object.values(item)[0].username,
+                username: userId,
               });
             }}
           />
         )}
-        keyExtractor={item => Object.values(item)[0].id}
+        keyExtractor={item =>
+          Object.values(item)[Object.values(item).length - 1]
+        }
       />
     </View>
   );
