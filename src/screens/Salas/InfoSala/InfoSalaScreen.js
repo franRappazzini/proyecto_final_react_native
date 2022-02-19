@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import {deleteSala} from '../../../redux/actions/SalaAction';
+import {deleteSala, removeSalaFromFav} from '../../../redux/actions/SalaAction';
 import {styles} from './styles';
 
 export default function InfoSalaScreen({navigation}) {
@@ -27,6 +27,7 @@ export default function InfoSalaScreen({navigation}) {
             size={30}
             onPress={() => {
               dispatch(deleteSala(uniqueSala.id));
+              dispatch(removeSalaFromFav(uniqueSala));
               navigation.goBack();
             }}
           />

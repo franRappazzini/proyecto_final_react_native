@@ -1,11 +1,7 @@
 import {Alert, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
-import {
-  getAllUsers,
-  getUser,
-  newUser,
-} from '../../../redux/actions/UserActions';
+import {getAllUsers, newUser} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
@@ -21,6 +17,10 @@ export default function CrearUserScreen({navigation}) {
   const [password, setPassword] = useState('');
   const ususarios = useSelector(state => state.user.users);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
   function crearUsuario() {
     if (
@@ -44,8 +44,7 @@ export default function CrearUserScreen({navigation}) {
             password.trim(),
           ),
         );
-        dispatch(getUser({nombre, apellido, email, username, password}));
-        navigation.navigate('Tab');
+        navigation.navigate('IniciarSesionScreen');
       } else {
         Alert.alert('El username/email ya esta registrado');
       }

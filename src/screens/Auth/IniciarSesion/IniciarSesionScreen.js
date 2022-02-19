@@ -1,12 +1,12 @@
 import {Alert, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
-import {getUser} from '../../../redux/actions/UserActions';
+import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {styles} from './styles';
 
 export default function IniciarSesionScreen({navigation}) {
@@ -14,6 +14,10 @@ export default function IniciarSesionScreen({navigation}) {
   const [contrasenia, setContrasenia] = useState('');
   const usuarios = useSelector(state => state.user.users);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
   function handleIniciarSesion() {
     const indexUsuario = usuarios.findIndex(
