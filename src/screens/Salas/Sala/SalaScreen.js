@@ -6,7 +6,7 @@ import {
   Text,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import {colors, styleContainer} from '../../../utils/constants/themes';
+import {colors} from '../../../utils/constants/themes';
 import {
   createMensajeSala,
   getMensajesSala,
