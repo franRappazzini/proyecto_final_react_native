@@ -10,9 +10,14 @@ export const styles = StyleSheet.create({
     borderBottomColor: colors.darkGrey,
     borderBottomWidth: 1,
   },
+  nameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   salaNombre: {
     fontSize: 20,
     color: colors.light,
+    marginRight: 10,
   },
   salaDescripcion: {
     fontWeight: '300',

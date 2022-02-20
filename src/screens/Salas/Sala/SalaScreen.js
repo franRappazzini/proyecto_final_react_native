@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Text,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 import {
   createMensajeSala,
@@ -24,6 +24,7 @@ export default function SalaScreen({navigation}) {
   const mensajes = useSelector(state => state.sala.mensajes);
   const uniqueSala = useSelector(state => state.sala.uniqueSala);
   const dispatch = useDispatch();
+  const flatList = useRef(null);
 
   useEffect(() => {
     dispatch(getMensajesSala(uniqueSala.id));
@@ -67,6 +68,8 @@ export default function SalaScreen({navigation}) {
               />
             )}
             keyExtractor={item => item.id}
+            ref={flatList}
+            onContentSizeChange={() => flatList.current.scrollToEnd()}
           />
         )}
 

@@ -2,7 +2,7 @@ import {FlatList, StatusBar, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
-import React from 'react';
+import React, {useRef} from 'react';
 import {styleContainer, colors} from '../../../utils/constants/themes';
 import {userChat} from '../../../redux/actions/UserActions';
 import {styles} from './styles';
@@ -11,6 +11,7 @@ export default function ChatsListScreen({navigation}) {
   const user = useSelector(state => state.user.user);
   const users = useSelector(state => state.user.users);
   const dispatch = useDispatch();
+  const flatList = useRef(null);
 
   // actualiza en tiempo real el chat del usuario para mostrar el ultimo mensaje en la lista de chats
   const userActualizado = users.find(u => u.username === user.username);
@@ -49,6 +50,8 @@ export default function ChatsListScreen({navigation}) {
           keyExtractor={item =>
             Object.values(item)[Object.values(item).length - 1]
           }
+          ref={flatList}
+          onContentSizeChange={() => flatList.current.scrollToEnd()}
         />
       ) : (
         <View>

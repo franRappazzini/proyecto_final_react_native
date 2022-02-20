@@ -6,11 +6,9 @@ import {
   getUniqueSala,
   removeSalaFromFav,
 } from '../../../redux/actions/SalaAction';
-import {colors, styleContainer} from '../../../utils/constants/themes';
+import {styleContainer} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
-import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Sala from '../../../components/molecules/Sala/Sala';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import {styles} from './styles';

@@ -1,4 +1,4 @@
-import {Modal, Pressable, Text, View} from 'react-native';
+import {Alert, Modal, Pressable, Text, View} from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React, {useState} from 'react';
@@ -7,6 +7,7 @@ import {styles} from './styles';
 import {useSelector} from 'react-redux';
 import TextInputCustom from '../../atoms/TextInputCustom/TextInputCustom';
 import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
+import ModalError from '../ModalError/ModalError';
 
 export default function Sala({
   sala,
@@ -17,6 +18,7 @@ export default function Sala({
 }) {
   const [contrasenia, setContrasenia] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const salasFav = useSelector(state => state.sala.salasFav);
   const {id, name, description, type, password} = sala;
 
@@ -59,8 +61,10 @@ export default function Sala({
   function verificarPassword() {
     if (contrasenia.trim() === password) {
       onPress();
+      setModalVisible(false);
+      setContrasenia('');
     } else {
-      console.warn('Contraseña incorrecta');
+      setModalErrorVisible(true);
     }
   }
 
@@ -72,7 +76,12 @@ export default function Sala({
         styles.salaContainer,
       ]}>
       <View>
-        <Text style={styles.salaNombre}>{name}</Text>
+        <View style={styles.nameContainer}>
+          <Text style={styles.salaNombre}>{name}</Text>
+          {type === 'private' && (
+            <Ionicons name="lock-closed" size={15} color={colors.light} />
+          )}
+        </View>
         <Text style={styles.salaDescripcion}>{description}</Text>
       </View>
 
@@ -108,6 +117,12 @@ export default function Sala({
           </View>
         </View>
       </Modal>
+
+      <ModalError
+        textError="Contraseña incorrecta"
+        setModalErrorVisible={setModalErrorVisible}
+        modalErrorVisible={modalErrorVisible}
+      />
     </Pressable>
   );
 }
