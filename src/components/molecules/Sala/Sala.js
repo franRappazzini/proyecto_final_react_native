@@ -18,7 +18,7 @@ export default function Sala({
   const [contrasenia, setContrasenia] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const salasFav = useSelector(state => state.sala.salasFav);
-  const {id, name, description, type} = sala;
+  const {id, name, description, type, password} = sala;
 
   // verifica si la sala ya esta en favoritos
   function verificarFav() {
@@ -56,6 +56,14 @@ export default function Sala({
     }
   }
 
+  function verificarPassword() {
+    if (contrasenia.trim() === password) {
+      onPress();
+    } else {
+      console.warn('Contraseña incorrecta');
+    }
+  }
+
   return (
     <Pressable
       onPress={salaPrivada}
@@ -86,8 +94,17 @@ export default function Sala({
         onRequestClose={() => setModalVisible(!modalVisible)}>
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
-            <TextInputCustom placeholder="Contraseña" />
-            <BtnCustom text="Ingresar" color={colors.purple} />
+            <TextInputCustom
+              placeholder="Contraseña"
+              autoCapitalize="none"
+              value={contrasenia.trim()}
+              onChangeText={setContrasenia}
+            />
+            <BtnCustom
+              text="Ingresar"
+              color={colors.purple}
+              onPress={verificarPassword}
+            />
           </View>
         </View>
       </Modal>
