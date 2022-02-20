@@ -23,4 +23,19 @@ export const styles = StyleSheet.create({
   },
   iconInfo: {marginRight: 5},
   iconHeart: {marginLeft: 5},
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(47, 49, 54, 0.9)',
+  },
+  modalContainer: {
+    width: '80%',
+    alignSelf: 'center',
+    flex: 0.3,
+
+    padding: 10,
+    borderRadius: 8,
+    justifyContent: 'center',
+    backgroundColor: colors.dark,
+  },
 });

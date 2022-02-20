@@ -1,10 +1,12 @@
-import {Pressable, Text, View} from 'react-native';
+import {Modal, Pressable, Text, View} from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import React from 'react';
+import React, {useState} from 'react';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
 import {useSelector} from 'react-redux';
+import TextInputCustom from '../../atoms/TextInputCustom/TextInputCustom';
+import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
 
 export default function Sala({
   sala,
@@ -13,9 +15,12 @@ export default function Sala({
   agregarFavorito,
   eliminarFavorito,
 }) {
+  const [contrasenia, setContrasenia] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
   const salasFav = useSelector(state => state.sala.salasFav);
-  const {id, name, description} = sala;
+  const {id, name, description, type} = sala;
 
+  // verifica si la sala ya esta en favoritos
   function verificarFav() {
     const salaFind = salasFav.findIndex(salaFav => salaFav.id === id);
 
@@ -42,9 +47,18 @@ export default function Sala({
     }
   }
 
+  // verifica si la sala es privada para pedir contrasenia
+  function salaPrivada() {
+    if (type === 'private') {
+      setModalVisible(true);
+    } else {
+      onPress();
+    }
+  }
+
   return (
     <Pressable
-      onPress={onPress}
+      onPress={salaPrivada}
       style={({pressed}) => [
         {backgroundColor: pressed ? colors.darkGrey : colors.dark},
         styles.salaContainer,
@@ -64,6 +78,19 @@ export default function Sala({
         />
         {verificarFav()}
       </View>
+
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(!modalVisible)}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <TextInputCustom placeholder="Contraseña" />
+            <BtnCustom text="Ingresar" color={colors.purple} />
+          </View>
+        </View>
+      </Modal>
     </Pressable>
   );
 }
