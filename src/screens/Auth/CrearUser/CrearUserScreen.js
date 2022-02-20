@@ -27,10 +27,10 @@ export default function CrearUserScreen({navigation}) {
 
   function crearUsuario() {
     if (
-      nombre !== '' ||
-      apellido !== '' ||
-      email !== '' ||
-      username !== '' ||
+      nombre !== '' &&
+      apellido !== '' &&
+      email !== '' &&
+      username !== '' &&
       password !== ''
     ) {
       const findUsusario = ususarios.find(

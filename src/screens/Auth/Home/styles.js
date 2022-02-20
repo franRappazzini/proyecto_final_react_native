@@ -7,10 +7,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logosContainer: {
-    // flexDirection: 'row',
     flexGrow: 0.2,
   },
   btnsContainer: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
 });
