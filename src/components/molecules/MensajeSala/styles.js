@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: 3,
     marginRight: 100,
+    marginLeft: 15,
   },
   img: {
     width: 30,
@@ -30,7 +31,6 @@ export const styles = StyleSheet.create({
   },
   fechaText: {color: colors.light, fontSize: 12, fontWeight: '300'},
   mensajeText: {color: colors.light, fontSize: 16},
-
   miMensajeContainer: {
     padding: 10,
     backgroundColor: colors.purple,
@@ -39,17 +39,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginBottom: 3,
     marginLeft: 100,
+    marginRight: 15,
   },
-  miImg: {
-    width: 30,
-    height: 30,
-    marginLeft: 10,
-    borderRadius: 25,
-  },
-  miInfoContainer: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  miMensajeText: {color: colors.light, fontSize: 16, textAlign: 'justify'},
 });

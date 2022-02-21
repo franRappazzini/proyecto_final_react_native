@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginRight: 100,
     marginBottom: 3,
+    marginLeft: 15,
   },
   miMensajeContainer: {
     padding: 10,
@@ -19,6 +20,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     marginLeft: 100,
     marginBottom: 3,
+    marginRight: 15,
   },
   mensajeText: {
     fontSize: 16,

@@ -1,7 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../../utils/constants/themes';
+import {colors, styleContainer} from '../../../utils/constants/themes';
 
 export const styles = StyleSheet.create({
+  screenContainer: {
+    ...styleContainer,
+    paddingHorizontal: 15,
+  },
   switchContainer: {
     flexDirection: 'row',
     alignItems: 'center',

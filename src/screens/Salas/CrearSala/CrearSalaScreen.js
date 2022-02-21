@@ -9,12 +9,14 @@ import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
 import {createSala} from '../../../redux/actions/SalaAction';
 import {fecha} from '../../../utils/functions/functions';
 import {styles} from './styles';
+import ModalError from '../../../components/molecules/ModalError/ModalError';
 
 export default function CrearSalaScreen({navigation}) {
   const [nombreSala, setNombreSala] = useState('');
   const [descripcionSala, setDescripcionSala] = useState('');
   const [passwordSala, setPasswordSala] = useState('');
   const [switchEnabled, setSwitchEnabled] = useState(false);
+  const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const user = useSelector(state => state.user.user);
   const toggleSwitch = () => setSwitchEnabled(!switchEnabled);
   const dispatch = useDispatch();
@@ -40,12 +42,12 @@ export default function CrearSalaScreen({navigation}) {
         navigation.goBack(),
       );
     } else {
-      console.warn('FALTAN DATOS');
+      setModalErrorVisible(true);
     }
   }
 
   return (
-    <View style={styleContainer}>
+    <View style={styles.screenContainer}>
       <TextLabel text="Nombre de sala" />
       <TextInputCustom
         value={nombreSala.trimStart()}
@@ -92,6 +94,12 @@ export default function CrearSalaScreen({navigation}) {
           onPress={crearSala}
         />
       </View>
+
+      <ModalError
+        textError="Debe completar todos los campos"
+        modalErrorVisible={modalErrorVisible}
+        setModalErrorVisible={setModalErrorVisible}
+      />
     </View>
   );
 }

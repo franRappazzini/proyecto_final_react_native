@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   screenContainer: {
     ...styleContainer,
     justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
   logosContainer: {
     flexGrow: 0.2,

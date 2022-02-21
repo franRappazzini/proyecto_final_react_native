@@ -10,10 +10,10 @@ export const styles = StyleSheet.create({
   miMensajeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     paddingVertical: 20,
   },
-  datosMensaje: {
-    marginLeft: 15,
+  trashIcon: {
+    paddingLeft: 15,
   },
 });

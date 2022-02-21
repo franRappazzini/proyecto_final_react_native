@@ -1,7 +1,6 @@
 export const styleContainer = {
   width: '100%',
   height: '100%',
-  paddingHorizontal: 15,
   alignSelf: 'center',
   backgroundColor: '#202225',
 };

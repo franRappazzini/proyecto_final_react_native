@@ -57,7 +57,7 @@ export default function CrearUserScreen({navigation}) {
   }
 
   return (
-    <View style={styleContainer}>
+    <View style={styles.screenContainer}>
       <View style={styles.inputsContainer}>
         <TextLabel text="Nombre" />
         <TextInputCustom

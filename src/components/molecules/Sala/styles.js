@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 15,
     borderBottomColor: colors.darkGrey,
     borderBottomWidth: 1,
+    paddingHorizontal: 15,
   },
   nameContainer: {
     flexDirection: 'row',

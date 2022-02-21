@@ -4,7 +4,7 @@ import {colors} from '../../../utils/constants/themes';
 export const styles = StyleSheet.create({
   chatListContainer: {
     flexDirection: 'row',
-    paddingVertical: 15,
+    padding: 15,
     alignItems: 'center',
   },
   img: {
