@@ -31,6 +31,8 @@ export default function IniciarSesionScreen({navigation}) {
     if (usuario && contrasenia === usuario.password) {
       dispatch(getUser(usuario));
       navigation.navigate('Tab');
+      setEmail('');
+      setContrasenia('');
     } else {
       setModalErrorVisible(true);
     }

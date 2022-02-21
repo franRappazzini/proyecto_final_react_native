@@ -12,7 +12,11 @@ export default function CrearSalaNavigation() {
         headerTintColor: colors.light,
         headerStyle: {backgroundColor: colors.darkGrey},
       }}>
-      <Stack.Screen name="CrearSalaScreen" component={CrearSalaScreen} />
+      <Stack.Screen
+        name="CrearSalaScreen"
+        component={CrearSalaScreen}
+        options={{title: 'Nueva sala'}}
+      />
     </Stack.Navigator>
   );
 }
