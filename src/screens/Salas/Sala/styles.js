@@ -5,5 +5,6 @@ export const styles = StyleSheet.create({
   salaContainer: {
     ...styleContainer,
     backgroundColor: 'transparent',
+    justifyContent: 'space-between',
   },
 });

@@ -3,7 +3,6 @@ import {StatusBar, Text, View} from 'react-native';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import LogoGroupChat from '../../../assets/svg/LogoGroupChat';
-import LogoOnlineChat from '../../../assets/svg/LogoOnlineChat';
 import LogoOnlineMessaging from '../../../assets/svg/LogoOnlineMessaging';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
@@ -16,16 +15,15 @@ export default function HomeScreen({navigation}) {
       <View style={styles.logosContainer}>
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 30,
             color: colors.light,
             textAlign: 'center',
             marginBottom: 10,
+            marginTop: 20,
           }}>
-          Bienvenido a msnapp
+          Bienvenido a MsnApp
         </Text>
         <LogoOnlineMessaging />
-
-        <LogoOnlineChat />
 
         <LogoGroupChat />
       </View>

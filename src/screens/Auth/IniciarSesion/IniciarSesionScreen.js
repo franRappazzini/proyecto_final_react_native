@@ -1,6 +1,6 @@
-import {Alert, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {colors, styleContainer} from '../../../utils/constants/themes';
+import {colors} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
