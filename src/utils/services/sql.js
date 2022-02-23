@@ -55,3 +55,11 @@ export function getUserLogIn() {
 
   return promise;
 }
+
+export function deleteUserLogIn() {
+  sql.transaction(tx => {
+    tx.executeSql('DELETE FROM userLogIn', [], (_, result) => {
+      console.log('deleteLogIn: ', result);
+    });
+  });
+}

@@ -47,6 +47,7 @@ export default function MensajeDetallesSalaScreen({route, navigation}) {
 
       <ModalEliminar
         text="Desea eliminar el mensaje?"
+        textEliminar="Eliminar"
         modalEliminar={modalEliminar}
         setModalEliminar={setModalEliminar}
         confirmEliminar={() => {

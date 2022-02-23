@@ -6,6 +6,7 @@ import {colors} from '../../../utils/constants/themes';
 
 export default function ModalEliminar({
   text,
+  textEliminar,
   modalEliminar,
   setModalEliminar,
   confirmEliminar,
@@ -22,7 +23,7 @@ export default function ModalEliminar({
 
           <View style={styles.btnsContainer}>
             <BtnCustom
-              text="Eliminar"
+              text={textEliminar}
               color={colors.red}
               onPress={confirmEliminar}
             />

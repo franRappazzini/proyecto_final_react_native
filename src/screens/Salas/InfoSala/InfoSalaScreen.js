@@ -48,6 +48,7 @@ export default function InfoSalaScreen({navigation}) {
 
       <ModalEliminar
         text="Desea eliminar la sala?"
+        textEliminar="Eliminar"
         modalEliminar={modalEliminar}
         setModalEliminar={setModalEliminar}
         confirmEliminar={() => {

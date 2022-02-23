@@ -9,4 +9,9 @@ export const styles = StyleSheet.create({
     marginVertical: 20,
   },
   text: {textAlign: 'center', fontSize: 20, color: colors.light},
+  btnContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 });
