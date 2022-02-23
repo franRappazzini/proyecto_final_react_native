@@ -22,7 +22,7 @@ export function getMensajes(id, username) {
 }
 
 export function createMensaje(id, username, mensaje) {
-  return async dispatch => {
+  return dispatch => {
     try {
       const {user, message, hour, day} = mensaje;
 

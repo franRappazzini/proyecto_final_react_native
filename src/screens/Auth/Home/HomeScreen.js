@@ -18,8 +18,6 @@ export default function HomeScreen({navigation}) {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  // console.log('users', users);
-
   getUserLogIn().then(user => {
     if (user[0]) {
       const findUser = users.find(u => u.username === user[0].username);
