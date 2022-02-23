@@ -7,15 +7,14 @@ import {styles} from './styles';
 import {useSelector} from 'react-redux';
 
 export default function Usuarios({
-  username,
-  nombre,
-  apellido,
+  usuario,
   navigation,
   onPress,
   agregarFavorito,
   eliminarFavorito,
 }) {
   const usersFav = useSelector(state => state.user.usersFav);
+  const {username, nombre, apellido, avatar} = usuario;
 
   function verificarFav() {
     const userFind = usersFav.findIndex(user => user.username === username);
@@ -56,7 +55,7 @@ export default function Usuarios({
       <Image
         style={styles.img}
         source={{
-          uri: 'https://icdn.dtcn.com/image/digitaltrends_es/bored-ape-yacht-club-720x720.jpg',
+          uri: avatar,
         }}
       />
 

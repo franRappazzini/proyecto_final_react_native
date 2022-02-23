@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 
 export default function ChatList({chats, onPress}) {
   const user = useSelector(state => state.user.user);
+  const users = useSelector(state => state.user.users);
   const chat = Object.values(chats);
 
   // tomo el nombre del usuario que selecciono para ir al chat y lo saco del array
@@ -19,6 +20,11 @@ export default function ChatList({chats, onPress}) {
     if (ultimoMensaje.username === user.username) {
       return 'Tu: ';
     }
+  }
+
+  function buscarAvatar() {
+    const findUser = users.find(u => u.username === userChat);
+    return findUser.avatar;
   }
 
   return (
@@ -34,7 +40,7 @@ export default function ChatList({chats, onPress}) {
       <Image
         style={styles.img}
         source={{
-          uri: 'https://icdn.dtcn.com/image/digitaltrends_es/bored-ape-yacht-club-720x720.jpg',
+          uri: buscarAvatar(),
         }}
       />
 

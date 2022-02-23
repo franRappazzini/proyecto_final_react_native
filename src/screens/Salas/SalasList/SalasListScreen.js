@@ -71,8 +71,8 @@ export default function SalasListScreen({navigation}) {
             <Text style={styles.textNoFav}>No hay salas favoritas</Text>
           )
         }
-        onPress={() => navigation.navigate('CrearSalaNav')}
-        btnVisible={true}
+        onPress={() => navigation.navigate('YoNav')}
+        btnText="Crear sala"
       />
       {busquedaSala && busquedaSala.length > 0 ? (
         <FlatList

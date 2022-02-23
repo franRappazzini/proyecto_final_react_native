@@ -12,6 +12,7 @@ import Usuarios from '../../../components/molecules/Usuarios/Usuarios';
 import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
 import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function UsuariosListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
@@ -33,6 +34,8 @@ export default function UsuariosListScreen({navigation}) {
         )
       : otrosUsuarios;
 
+  console.log(busquedaUsers[1].avatar);
+
   return (
     <View style={styleContainer}>
       <View style={styles.inputContainer}>
@@ -52,9 +55,7 @@ export default function UsuariosListScreen({navigation}) {
               data={usersFav}
               renderItem={({item}) => (
                 <Usuarios
-                  username={item.username}
-                  nombre={item.nombre}
-                  apellido={item.apellido}
+                  usuario={item}
                   onPress={() => {
                     dispatch(userChat(item));
                     navigation.navigate('ChatNav', {
@@ -76,6 +77,8 @@ export default function UsuariosListScreen({navigation}) {
             </Text>
           )
         }
+        onPress={() => navigation.navigate('YoNav')}
+        iconName="person-circle-outline"
       />
 
       {busquedaUsers && busquedaUsers.length > 0 ? (
@@ -83,9 +86,7 @@ export default function UsuariosListScreen({navigation}) {
           data={busquedaUsers}
           renderItem={({item}) => (
             <Usuarios
-              username={item.username}
-              nombre={item.nombre}
-              apellido={item.apellido}
+              usuario={item}
               onPress={() => {
                 dispatch(userChat(item));
                 navigation.navigate('ChatNav', {

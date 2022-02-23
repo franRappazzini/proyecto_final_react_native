@@ -8,6 +8,7 @@ import React from 'react';
 import SalasNavigation from './SalasNav/SalasNavigation';
 import TabNavigation from './TabNav/TabNavigation';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import YoNavigation from './YoNav/YoNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +30,10 @@ export default function AppNavigation() {
         />
 
         <Stack.Screen name="InfoSalaNav" component={InfoSalaNavigation} />
+
         <Stack.Screen name="CrearSalaNav" component={CrearSalaNavigation} />
+
+        <Stack.Screen name="YoNav" component={YoNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

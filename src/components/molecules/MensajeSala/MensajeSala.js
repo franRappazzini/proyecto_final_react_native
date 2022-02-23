@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 
 export default function MensajeSala({mensaje, onLongPress}) {
   const user = useSelector(state => state.user.user);
-  const {username, message, day, hour} = mensaje;
+  const {username, message, day, hour, avatar} = mensaje;
 
   function validarMensaje() {
     if (username === user.username) {
@@ -22,7 +22,7 @@ export default function MensajeSala({mensaje, onLongPress}) {
       style={({pressed}) => [{opacity: pressed ? 0.6 : 1}, validarMensaje()]}>
       <Image
         source={{
-          uri: 'https://icdn.dtcn.com/image/digitaltrends_es/bored-ape-yacht-club-720x720.jpg',
+          uri: avatar,
         }}
         style={styles.img}
       />

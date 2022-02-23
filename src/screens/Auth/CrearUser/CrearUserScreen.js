@@ -38,6 +38,8 @@ export default function CrearUserScreen({navigation}) {
       );
 
       if (!findUsusario) {
+        const avatar = `https://api.multiavatar.com/${username}.png`;
+
         dispatch(
           newUser(
             nombre.trim(),
@@ -45,6 +47,7 @@ export default function CrearUserScreen({navigation}) {
             email.trim(),
             username.trim(),
             password.trim(),
+            avatar,
           ),
         );
         navigation.navigate('IniciarSesionScreen');

@@ -41,7 +41,7 @@ export function getUser(user) {
   };
 }
 
-export function newUser(nombre, apellido, email, username, password) {
+export function newUser(nombre, apellido, email, username, password, avatar) {
   return dispatch => {
     db.ref('users').push({
       nombre,
@@ -49,6 +49,7 @@ export function newUser(nombre, apellido, email, username, password) {
       email,
       username,
       password,
+      avatar,
     });
 
     dispatch({type: CREATE_USER});

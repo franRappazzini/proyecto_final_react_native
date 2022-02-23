@@ -7,13 +7,13 @@ import {useSelector} from 'react-redux';
 
 export default function InfoUsuariosScreen() {
   const userChat = useSelector(state => state.user.userChat);
-  const {nombre, apellido, username} = userChat;
+  const {nombre, apellido, username, avatar} = userChat;
 
   return (
     <View style={styleContainer}>
       <Image
         source={{
-          uri: 'https://icdn.dtcn.com/image/digitaltrends_es/bored-ape-yacht-club-720x720.jpg',
+          uri: avatar,
         }}
         style={styles.img}
       />

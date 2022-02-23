@@ -38,6 +38,7 @@ export default function SalaScreen({navigation}) {
           username: user.username,
           day: fecha().day,
           hour: fecha().hour,
+          avatar: `https://api.multiavatar.com/${user.username}.png`,
         }),
       );
       setNuevoMensaje('');

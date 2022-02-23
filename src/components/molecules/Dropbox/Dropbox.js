@@ -5,9 +5,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
 import {colors} from '../../../utils/constants/themes';
 
-export default function Dropbox({children, text, onPress, btnVisible}) {
+export default function Dropbox({
+  children,
+  text,
+  onPress,
+  btnVisible,
+  btnText,
+  iconName,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const btnCrearSala = btnVisible ? btnVisible : false;
 
   return (
     <Pressable
@@ -19,12 +25,18 @@ export default function Dropbox({children, text, onPress, btnVisible}) {
           <Ionicons name={isOpen ? 'chevron-down' : 'chevron-up'} size={20} />
         </View>
 
-        <View style={{display: btnCrearSala ? 'flex' : 'none'}}>
-          <BtnCustom
-            text="Crear sala"
-            color={colors.purple}
-            onPress={onPress}
-          />
+        <View>
+          {btnText && (
+            <BtnCustom text={btnText} color={colors.purple} onPress={onPress} />
+          )}
+          {iconName && (
+            <Ionicons
+              name={iconName}
+              size={30}
+              color={colors.light}
+              onPress={onPress}
+            />
+          )}
         </View>
       </View>
 

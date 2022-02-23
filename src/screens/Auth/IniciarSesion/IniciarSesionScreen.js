@@ -36,6 +36,7 @@ export default function IniciarSesionScreen({navigation}) {
         usuario.email,
         usuario.username,
         usuario.password,
+        usuario.avatar,
       );
       dispatch(getUser(usuario));
       navigation.navigate('Tab');
