@@ -10,7 +10,7 @@ export const USER_FAVORITE_REMOVE = 'USER_FAVORITE_REMOVE';
 const db = getDB();
 
 export function getAllUsers() {
-  return async dispatch => {
+  return dispatch => {
     try {
       db.ref('users').on('value', data => {
         const users = data.val()
@@ -31,7 +31,7 @@ export function getAllUsers() {
 export function getUser(user) {
   return async dispatch => {
     try {
-      dispatch({
+      await dispatch({
         type: GET_USER,
         user,
       });
@@ -42,7 +42,7 @@ export function getUser(user) {
 }
 
 export function newUser(nombre, apellido, email, username, password) {
-  return async dispatch => {
+  return dispatch => {
     db.ref('users').push({
       nombre,
       apellido,

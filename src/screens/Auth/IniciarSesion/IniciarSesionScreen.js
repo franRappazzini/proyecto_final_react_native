@@ -9,6 +9,7 @@ import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
 import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {styles} from './styles';
 import ModalError from '../../../components/molecules/ModalError/ModalError';
+import {insertUserLogIn} from '../../../utils/services/sql';
 
 export default function IniciarSesionScreen({navigation}) {
   const [email, setEmail] = useState('');
@@ -23,12 +24,19 @@ export default function IniciarSesionScreen({navigation}) {
 
   function handleIniciarSesion() {
     const indexUsuario = usuarios.findIndex(
-      user => (user.email || user.username) === email,
+      user => (user.email || user.username) === email.trim(),
     );
 
     const usuario = usuarios[indexUsuario];
 
     if (usuario && contrasenia === usuario.password) {
+      insertUserLogIn(
+        usuario.nombre,
+        usuario.apellido,
+        usuario.email,
+        usuario.username,
+        usuario.password,
+      );
       dispatch(getUser(usuario));
       navigation.navigate('Tab');
       setEmail('');
@@ -45,7 +53,7 @@ export default function IniciarSesionScreen({navigation}) {
         <TextLabel text="Username o email" />
         <TextInputCustom
           placeholder="Usuario o email"
-          value={email}
+          value={email.trim()}
           onChangeText={setEmail}
           type="email-address"
           autoCapitalize="none"

@@ -16,12 +16,13 @@ export default function ChatsListScreen({navigation}) {
   // actualiza en tiempo real el chat del usuario para mostrar el ultimo mensaje en la lista de chats
   const userActualizado = users.find(u => u.username === user.username);
 
-  const chats = userActualizado.chats
-    ? Object.keys(userActualizado.chats).map(key => ({
-        ...userActualizado.chats[key],
-        id: key,
-      }))
-    : null;
+  const chats =
+    userActualizado && userActualizado.chats
+      ? Object.keys(userActualizado.chats).map(key => ({
+          ...userActualizado.chats[key],
+          id: key,
+        }))
+      : null;
 
   // busca el usuario que selecciono para ir al chat
   function comprobarUsuario(item) {

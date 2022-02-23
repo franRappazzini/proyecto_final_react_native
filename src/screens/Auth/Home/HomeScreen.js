@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
@@ -6,23 +6,36 @@ import LogoGroupChat from '../../../assets/svg/LogoGroupChat';
 import LogoOnlineMessaging from '../../../assets/svg/LogoOnlineMessaging';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
+import {getUserLogIn} from '../../../utils/services/sql';
 
 export default function HomeScreen({navigation}) {
+  const users = useSelector(state => state.user.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
+  // console.log('users', users);
+
+  getUserLogIn().then(user => {
+    if (user[0]) {
+      const findUser = users.find(u => u.username === user[0].username);
+      dispatch(getUser(findUser));
+      if (findUser) {
+        navigation.navigate('Tab');
+      }
+    }
+  });
+
   return (
     <View style={styles.screenContainer}>
       <StatusBar backgroundColor={colors.dark} />
 
       <View style={styles.logosContainer}>
-        <Text
-          style={{
-            fontSize: 30,
-            color: colors.light,
-            textAlign: 'center',
-            marginBottom: 10,
-            marginTop: 20,
-          }}>
-          Bienvenido a MsnApp
-        </Text>
+        <Text style={styles.name}>Purple Chat</Text>
         <LogoOnlineMessaging />
 
         <LogoGroupChat />
