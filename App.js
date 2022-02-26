@@ -1,10 +1,15 @@
+import {init, initFav} from './src/utils/services/sql';
+
 import AppNavigation from './src/navigation/AppNavigation';
 import {Provider} from 'react-redux';
 import React from 'react';
 import RootReducer from './src/redux/storage/RootReducer';
-import {init} from './src/utils/services/sql';
 
 init()
+  .then(() => console.log('SQLite Initialized'))
+  .catch(err => console.log('SQLite ERROR: ', err));
+
+initFav()
   .then(() => console.log('SQLite Initialized'))
   .catch(err => console.log('SQLite ERROR: ', err));
 

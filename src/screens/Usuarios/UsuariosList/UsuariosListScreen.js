@@ -1,18 +1,22 @@
 import {FlatList, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   addUserToFav,
   removeUserToFav,
   userChat,
 } from '../../../redux/actions/UserActions';
+import {
+  deleteUserFromFav,
+  getUsersInFav,
+  insertUserToFav,
+} from '../../../utils/services/sql';
 import {useDispatch, useSelector} from 'react-redux';
 
+import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import Usuarios from '../../../components/molecules/Usuarios/Usuarios';
 import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
-import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function UsuariosListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
@@ -22,6 +26,15 @@ export default function UsuariosListScreen({navigation}) {
   // todos los usuarios menos el que inicio sesion
   const otrosUsuarios = usuarios.filter(usuario => usuario.id !== user.id);
   const dispatch = useDispatch();
+
+  // const fav = [];
+
+  // getUsersInFav()
+  //   .then(data => fav.push(data))
+  //   .catch(err => console.log(err))
+  //   .finally(() => {
+  //     fav.forEach(f => dispatch(addUserToFav(f)));
+  //   });
 
   // filtro de busqueda
   const busquedaUsers =
@@ -33,8 +46,6 @@ export default function UsuariosListScreen({navigation}) {
             usuario.apellido.toLowerCase().includes(busqueda.toLowerCase()),
         )
       : otrosUsuarios;
-
-  console.log(busquedaUsers[1].avatar);
 
   return (
     <View style={styleContainer}>
@@ -66,7 +77,10 @@ export default function UsuariosListScreen({navigation}) {
                     dispatch(userChat(item));
                     navigation.navigate('InfoUsuariosNav');
                   }}
-                  eliminarFavorito={() => dispatch(removeUserToFav(item))}
+                  eliminarFavorito={() => {
+                    deleteUserFromFav(item.username);
+                    dispatch(removeUserToFav(item));
+                  }}
                 />
               )}
               keyExtractor={item => item.id}
@@ -97,8 +111,14 @@ export default function UsuariosListScreen({navigation}) {
                 dispatch(userChat(item));
                 navigation.navigate('InfoUsuariosNav');
               }}
-              agregarFavorito={() => dispatch(addUserToFav(item))}
-              eliminarFavorito={() => dispatch(removeUserToFav(item))}
+              agregarFavorito={() => {
+                insertUserToFav(item);
+                dispatch(addUserToFav(item));
+              }}
+              eliminarFavorito={() => {
+                deleteUserFromFav(item.username);
+                dispatch(removeUserToFav(item));
+              }}
             />
           )}
         />
