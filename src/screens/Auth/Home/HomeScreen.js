@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
+import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
+import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import LogoGroupChat from '../../../assets/svg/LogoGroupChat';
 import LogoOnlineMessaging from '../../../assets/svg/LogoOnlineMessaging';
 import {colors} from '../../../utils/constants/themes';
-import {styles} from './styles';
-import {useDispatch, useSelector} from 'react-redux';
-import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {getUserLogIn} from '../../../utils/services/sql';
+import {styles} from './styles';
 
 export default function HomeScreen({navigation}) {
   const users = useSelector(state => state.user.users);
