@@ -29,15 +29,11 @@ export function getAllUsers() {
 }
 
 export function getUser(user) {
-  return async dispatch => {
-    try {
-      await dispatch({
-        type: GET_USER,
-        user,
-      });
-    } catch (err) {
-      console.warn(err);
-    }
+  return dispatch => {
+    dispatch({
+      type: GET_USER,
+      user,
+    });
   };
 }
 

@@ -8,16 +8,20 @@ const db = getDB();
 
 export function getMensajes(id, username) {
   return dispatch => {
-    db.ref(`users/${id}/chats/${username}`).on('value', data => {
-      const mensajes = data.val()
-        ? Object.keys(data.val()).map(key => ({...data.val()[key], id: key}))
-        : false;
+    try {
+      db.ref(`users/${id}/chats/${username}`).on('value', data => {
+        const mensajes = data.val()
+          ? Object.keys(data.val()).map(key => ({...data.val()[key], id: key}))
+          : false;
 
-      dispatch({
-        type: GET_MENSAJES,
-        mensajes,
+        dispatch({
+          type: GET_MENSAJES,
+          mensajes,
+        });
       });
-    });
+    } catch (err) {
+      console.warn('ERROR', err);
+    }
   };
 }
 
@@ -33,9 +37,7 @@ export function createMensaje(id, username, mensaje) {
         day: day,
       });
 
-      dispatch({
-        type: CREATE_MENSAJE,
-      });
+      dispatch({type: CREATE_MENSAJE});
     } catch (err) {
       console.warn('ERROR', err);
     }

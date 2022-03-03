@@ -44,7 +44,7 @@ export function getMensajesSala(idSala) {
         });
       });
     } catch (err) {
-      console.warn(err);
+      console.warn('ERROR', err);
     }
   };
 }
@@ -56,7 +56,7 @@ export function createMensajeSala(idSala, mensaje) {
 
       dispatch({type: SEND_MESSAGE});
     } catch (err) {
-      console.warn(err);
+      console.warn('ERROR', err);
     }
   };
 }

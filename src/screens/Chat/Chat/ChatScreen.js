@@ -1,5 +1,10 @@
-import {FlatList, ImageBackground, KeyboardAvoidingView} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {
+  FlatList,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Text,
+} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   createMensaje,
   getMensajes,
@@ -18,6 +23,7 @@ export default function ChatScreen({navigation}) {
   const mensajes = useSelector(state => state.mensajes);
   const userChat = useSelector(state => state.user.userChat);
   const dispatch = useDispatch();
+  const flatList = useRef(null);
 
   useEffect(() => {
     dispatch(getMensajes(user.id, userChat.username));
@@ -42,7 +48,7 @@ export default function ChatScreen({navigation}) {
     <ImageBackground
       source={require('../../../assets/img/background-chat.jpg')}>
       <KeyboardAvoidingView style={styles.chatContainer}>
-        {mensajes && mensajes.length > 0 && (
+        {mensajes && mensajes.length > 0 ? (
           <FlatList
             data={mensajes}
             renderItem={({item}) => (
@@ -56,7 +62,11 @@ export default function ChatScreen({navigation}) {
               />
             )}
             keyExtractor={item => item.id}
+            ref={flatList}
+            onContentSizeChange={() => flatList.current.scrollToEnd()}
           />
+        ) : (
+          <Text style={styles.textNoMensajes}>Aun no tienes mensajes</Text>
         )}
 
         <InputEnviarMensaje

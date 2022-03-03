@@ -6,5 +6,11 @@ export const styles = StyleSheet.create({
     ...styleContainer,
     backgroundColor: 'transparent',
     justifyContent: 'space-between',
+    height: '100%',
+  },
+  textNoMensajes: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
