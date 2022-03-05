@@ -1,13 +1,17 @@
 import {FlatList, StatusBar, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {colors, styleContainer} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
 import ChatList from '../../../components/molecules/ChatList/ChatList';
-import React from 'react';
+import ModalError from '../../../components/molecules/ModalError/ModalError';
+import NetInfo from '@react-native-community/netinfo';
+import {deleteUserLogIn} from '../../../utils/services/sql';
 import {styles} from './styles';
 import {userChat} from '../../../redux/actions/UserActions';
 
 export default function ChatsListScreen({navigation}) {
+  const [modalInternet, setModalInternet] = useState(false);
   const user = useSelector(state => state.user.user);
   const users = useSelector(state => state.user.users);
   const dispatch = useDispatch();
@@ -27,6 +31,21 @@ export default function ChatsListScreen({navigation}) {
   function comprobarUsuario(item) {
     const userFilter = users.filter(u => u.username === item);
     userFilter !== [] && dispatch(userChat(userFilter[0]));
+  }
+
+  // si no hay conexion a internet sale al home
+  useEffect(() => {
+    NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+
+      state.isConnected === true ? null : goBackHome();
+    });
+  }, [navigation]);
+
+  function goBackHome() {
+    setModalInternet(true);
+    deleteUserLogIn();
   }
 
   return (
@@ -60,6 +79,13 @@ export default function ChatsListScreen({navigation}) {
           </Text>
         </View>
       )}
+
+      <ModalError
+        textError="No hay conexión a internet"
+        setModalErrorVisible={setModalInternet}
+        modalErrorVisible={modalInternet}
+        goBack={() => navigation.goBack()}
+      />
     </View>
   );
 }

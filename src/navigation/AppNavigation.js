@@ -7,8 +7,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import SalasNavigation from './SalasNav/SalasNavigation';
 import TabNavigation from './TabNav/TabNavigation';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import YoNavigation from './YoNav/YoNavigation';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 

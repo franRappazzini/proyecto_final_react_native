@@ -1,13 +1,24 @@
-import {View, Text, Modal} from 'react-native';
+import {Modal, Text, View} from 'react-native';
+
+import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
 import React from 'react';
 import {styles} from './sytles';
-import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
 
 export default function ModalError({
   textError,
   setModalErrorVisible,
   modalErrorVisible,
+  goBack,
 }) {
+  function verificarGoBack() {
+    if (goBack) {
+      goBack();
+      setModalErrorVisible(!modalErrorVisible);
+    } else {
+      setModalErrorVisible(!modalErrorVisible);
+    }
+  }
+
   return (
     <Modal
       visible={modalErrorVisible}
@@ -17,10 +28,7 @@ export default function ModalError({
       <View style={styles.backgroundContainer}>
         <View style={styles.modalContainer}>
           <Text style={styles.textError}>{textError}</Text>
-          <BtnCustom
-            text="OK"
-            onPress={() => setModalErrorVisible(!modalErrorVisible)}
-          />
+          <BtnCustom text="OK" onPress={verificarGoBack} />
         </View>
       </View>
     </Modal>

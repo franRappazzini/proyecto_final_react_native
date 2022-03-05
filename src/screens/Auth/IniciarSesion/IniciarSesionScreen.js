@@ -1,20 +1,22 @@
-import {Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {colors} from '../../../utils/constants/themes';
+import {Text, View} from 'react-native';
+import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
+import ModalError from '../../../components/molecules/ModalError/ModalError';
+import NetInfo from '@react-native-community/netinfo';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
-import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
-import {styles} from './styles';
-import ModalError from '../../../components/molecules/ModalError/ModalError';
+import {colors} from '../../../utils/constants/themes';
 import {insertUserLogIn} from '../../../utils/services/sql';
+import {styles} from './styles';
 
 export default function IniciarSesionScreen({navigation}) {
   const [email, setEmail] = useState('');
   const [contrasenia, setContrasenia] = useState('');
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
+  const [modalInternet, setModalInternet] = useState(false);
   const usuarios = useSelector(state => state.user.users);
   const dispatch = useDispatch();
 
@@ -46,6 +48,14 @@ export default function IniciarSesionScreen({navigation}) {
       setModalErrorVisible(true);
     }
   }
+
+  useEffect(() => {
+    NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      state.isConnected === true ? null : setModalInternet(true);
+    });
+  }, []);
 
   return (
     <View style={styles.screenContainer}>
@@ -79,6 +89,13 @@ export default function IniciarSesionScreen({navigation}) {
         textError="Usuario/email o contraseña incorrectos"
         setModalErrorVisible={setModalErrorVisible}
         modalErrorVisible={modalErrorVisible}
+      />
+
+      <ModalError
+        textError="No hay conexión a internet"
+        setModalErrorVisible={setModalInternet}
+        modalErrorVisible={modalInternet}
+        goBack={() => navigation.goBack()}
       />
     </View>
   );

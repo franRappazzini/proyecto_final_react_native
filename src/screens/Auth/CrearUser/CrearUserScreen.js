@@ -1,14 +1,15 @@
-import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {colors, styleContainer} from '../../../utils/constants/themes';
 import {getAllUsers, newUser} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
+import ModalError from '../../../components/molecules/ModalError/ModalError';
+import NetInfo from '@react-native-community/netinfo';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
+import {View} from 'react-native';
+import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';
-import ModalError from '../../../components/molecules/ModalError/ModalError';
 
 export default function CrearUserScreen({navigation}) {
   const [nombre, setNombre] = useState('');
@@ -18,6 +19,7 @@ export default function CrearUserScreen({navigation}) {
   const [password, setPassword] = useState('');
   const [modalErrorVisible, setModalErrorVisible] = useState(false);
   const [modalRegistradosVisible, setModalRegistradosVisible] = useState(false);
+  const [modalInternet, setModalInternet] = useState(false);
   const ususarios = useSelector(state => state.user.users);
   const dispatch = useDispatch();
 
@@ -58,6 +60,14 @@ export default function CrearUserScreen({navigation}) {
       setModalErrorVisible(true);
     }
   }
+
+  useEffect(() => {
+    NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      state.isConnected === true ? null : setModalInternet(true);
+    });
+  }, []);
 
   return (
     <View style={styles.screenContainer}>
@@ -120,6 +130,12 @@ export default function CrearUserScreen({navigation}) {
         textError="El usuario/email ya esta registrado"
         setModalErrorVisible={setModalRegistradosVisible}
         modalErrorVisible={modalRegistradosVisible}
+      />
+      <ModalError
+        textError="No hay conexión a internet"
+        setModalErrorVisible={setModalInternet}
+        modalErrorVisible={modalInternet}
+        goBack={() => navigation.goBack()}
       />
     </View>
   );
