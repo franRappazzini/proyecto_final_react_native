@@ -13,7 +13,6 @@ export function getMensajes(id, username) {
         const mensajes = data.val()
           ? Object.keys(data.val()).map(key => ({...data.val()[key], id: key}))
           : false;
-
         dispatch({
           type: GET_MENSAJES,
           mensajes,

@@ -1,5 +1,6 @@
+import {colors, styleContainer} from '../../../utils/constants/themes';
+
 import {StyleSheet} from 'react-native';
-import {styleContainer, colors} from '../../../utils/constants/themes';
 
 export const styles = StyleSheet.create({
   screenContainer: {

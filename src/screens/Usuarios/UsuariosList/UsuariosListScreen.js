@@ -78,7 +78,7 @@ export default function UsuariosListScreen({navigation}) {
                     navigation.navigate('InfoUsuariosNav');
                   }}
                   eliminarFavorito={() => {
-                    deleteUserFromFav(item.username);
+                    // deleteUserFromFav(item.username);
                     dispatch(removeUserToFav(item));
                   }}
                 />
@@ -112,11 +112,11 @@ export default function UsuariosListScreen({navigation}) {
                 navigation.navigate('InfoUsuariosNav');
               }}
               agregarFavorito={() => {
-                insertUserToFav(item);
+                // insertUserToFav(item);
                 dispatch(addUserToFav(item));
               }}
               eliminarFavorito={() => {
-                deleteUserFromFav(item.username);
+                // deleteUserFromFav(item.username);
                 dispatch(removeUserToFav(item));
               }}
             />

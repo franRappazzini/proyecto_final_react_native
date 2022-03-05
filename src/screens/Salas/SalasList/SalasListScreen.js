@@ -6,13 +6,13 @@ import {
   getUniqueSala,
   removeSalaFromFav,
 } from '../../../redux/actions/SalaAction';
-import {styleContainer} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
+import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
 import Sala from '../../../components/molecules/Sala/Sala';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
+import {styleContainer} from '../../../utils/constants/themes';
 import {styles} from './styles';
-import Dropbox from '../../../components/molecules/Dropbox/Dropbox';
 
 export default function SalasListScreen({navigation}) {
   const [busqueda, setBusqueda] = useState('');
@@ -71,7 +71,7 @@ export default function SalasListScreen({navigation}) {
             <Text style={styles.textNoFav}>No hay salas favoritas</Text>
           )
         }
-        onPress={() => navigation.navigate('YoNav')}
+        onPress={() => navigation.navigate('CrearSalaNav')}
         btnText="Crear sala"
       />
       {busquedaSala && busquedaSala.length > 0 ? (
