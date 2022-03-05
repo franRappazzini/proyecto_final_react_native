@@ -6,6 +6,7 @@ import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import ModalError from '../../../components/molecules/ModalError/ModalError';
 import NetInfo from '@react-native-community/netinfo';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
+import TextInputPassword from '../../../components/atoms/TextInputPassword/TextInputPassword';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
 import {View} from 'react-native';
 import {colors} from '../../../utils/constants/themes';
@@ -80,14 +81,12 @@ export default function CrearUserScreen({navigation}) {
           autoFocus={true}
           autoComplete="name"
         />
-
         <TextLabel text="Apellido" />
         <TextInputCustom
           placeholder="Apellido"
           value={apellido.trim()}
           onChangeText={setApellido}
         />
-
         <TextLabel text="Email" />
         <TextInputCustom
           placeholder="Email"
@@ -97,7 +96,6 @@ export default function CrearUserScreen({navigation}) {
           type="email-address"
           autoComplete="email"
         />
-
         <TextLabel text="Username" />
         <TextInputCustom
           placeholder="Username"
@@ -105,14 +103,11 @@ export default function CrearUserScreen({navigation}) {
           onChangeText={setUsername}
           autoCapitalize="none"
         />
-
         <TextLabel text="Contraseña" />
-        <TextInputCustom
-          placeholder="Contraseña"
+        <TextInputPassword
+          placeholder="Contraseña (evite poner una real)"
           value={password.trim()}
           onChangeText={setPassword}
-          autoCapitalize="none"
-          type="visible-password"
         />
       </View>
 

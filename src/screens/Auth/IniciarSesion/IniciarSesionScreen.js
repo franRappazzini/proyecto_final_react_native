@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 import {getAllUsers, getUser} from '../../../redux/actions/UserActions';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -7,6 +7,7 @@ import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
 import ModalError from '../../../components/molecules/ModalError/ModalError';
 import NetInfo from '@react-native-community/netinfo';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
+import TextInputPassword from '../../../components/atoms/TextInputPassword/TextInputPassword';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
 import {colors} from '../../../utils/constants/themes';
 import {insertUserLogIn} from '../../../utils/services/sql';
@@ -72,9 +73,8 @@ export default function IniciarSesionScreen({navigation}) {
         />
 
         <TextLabel text="Contraseña" />
-        <TextInputCustom
+        <TextInputPassword
           placeholder="Contraseña"
-          type="visible-password"
           value={contrasenia}
           onChangeText={setContrasenia}
         />

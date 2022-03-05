@@ -4,12 +4,13 @@ import {colors, styleContainer} from '../../../utils/constants/themes';
 import {useDispatch, useSelector} from 'react-redux';
 
 import BtnCustom from '../../../components/atoms/BtnCustom/BtnCustom';
+import ModalError from '../../../components/molecules/ModalError/ModalError';
 import TextInputCustom from '../../../components/atoms/TextInputCustom/TextInputCustom';
+import TextInputPassword from '../../../components/atoms/TextInputPassword/TextInputPassword';
 import TextLabel from '../../../components/atoms/TextLabel/TextLabel';
 import {createSala} from '../../../redux/actions/SalaAction';
 import {fecha} from '../../../utils/functions/functions';
 import {styles} from './styles';
-import ModalError from '../../../components/molecules/ModalError/ModalError';
 
 export default function CrearSalaScreen({navigation}) {
   const [nombreSala, setNombreSala] = useState('');
@@ -78,11 +79,10 @@ export default function CrearSalaScreen({navigation}) {
       {switchEnabled && (
         <View>
           <TextLabel text="Contraseña" />
-          <TextInputCustom
+          <TextInputPassword
             value={passwordSala.trim()}
             onChangeText={setPasswordSala}
             placeholder="Contraseña"
-            type="visible-password"
           />
         </View>
       )}

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 
 import AppNavigation from './src/navigation/AppNavigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Provider} from 'react-redux';
 import RootReducer from './src/redux/storage/RootReducer';
 import SplashScreen from 'react-native-splash-screen';
