@@ -1,10 +1,9 @@
-import {Alert, Modal, Pressable, Text, View} from 'react-native';
+import {Modal, Pressable, Text, View} from 'react-native';
 import React, {useState} from 'react';
 
 import BtnCustom from '../../atoms/BtnCustom/BtnCustom';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ModalError from '../ModalError/ModalError';
-import TextInputCustom from '../../atoms/TextInputCustom/TextInputCustom';
 import TextInputPassword from '../../atoms/TextInputPassword/TextInputPassword';
 import {colors} from '../../../utils/constants/themes';
 import {styles} from './styles';

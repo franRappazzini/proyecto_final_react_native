@@ -42,17 +42,3 @@ export function createMensaje(id, username, mensaje) {
     }
   };
 }
-
-// export function deleteMensaje(userId, username, mensajeId) {
-//   return dispatch => {
-//     try {
-//       db.ref(`users/${userId}/chats/${username}/${mensajeId}`).;
-
-//       dispatch({
-//         type: DELETE_MENSAJE,
-//       });
-//     } catch (err) {
-//       console.warn(err);
-//     }
-//   };
-// }
